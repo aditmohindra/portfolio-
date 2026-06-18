@@ -1,18 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Container from '../components/layout/Container.astro';
+import PortfolioShell from '../components/layout/PortfolioShell.astro';
+import HeroRecord from '../components/home/HeroRecord.astro';
+import { siteConfig } from '../data/site';
 ---
 
-<BaseLayout title="Adit Mohindra">
-  <Container>
-    <section class="py-12">
-      <h1 class="text-2xl font-semibold text-ink">Adit Mohindra</h1>
-      <p class="mt-2 font-mono text-xs uppercase tracking-widest text-ink-muted">
-        Data Scientist / ML Engineer / AI Engineer
-      </p>
-      <p class="mt-6 max-w-prose text-ink-muted">
-        Foundation scaffold — homepage UI will be built in Phase 2.
-      </p>
-    </section>
-  </Container>
+<BaseLayout
+  title="Adit Mohindra"
+  description={`${siteConfig.roleLine} — ${siteConfig.tagline}`}
+  layout="portfolio"
+>
+  <PortfolioShell>
+    <HeroRecord />
+  </PortfolioShell>
 </BaseLayout>

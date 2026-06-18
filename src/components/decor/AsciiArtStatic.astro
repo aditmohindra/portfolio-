@@ -1,0 +1,17 @@
+---
+import { asciiArtAssets, type AsciiArtAsset } from '../../data/ascii-art';
+
+interface Props {
+  /** Key into `src/data/ascii-art/` assets */
+  variant?: AsciiArtAsset;
+  class?: string;
+}
+
+const { variant = 'heroCompass', class: className } = Astro.props;
+
+const art = asciiArtAssets[variant];
+---
+
+<pre
+  class:list={['m-0 whitespace-pre font-mono leading-none text-accent-deep', className]}
+  aria-hidden="true">{art}</pre>

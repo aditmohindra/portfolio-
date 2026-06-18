@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  company: string;
+  location: string;
+  start: string;
+  end: string;
+  highlights: string[];
+  class?: string;
+}
+
+const { title, company, location, start, end, highlights, class: className } = Astro.props;
+
+function formatMonth(value: string): string {
+  if (value === 'Present') return 'Present';
+  const [year, month] = value.split('-');
+  if (!month) return value;
+  const date = new Date(Number(year), Number(month) - 1);
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+
+const dateRange = `${formatMonth(start)} – ${formatMonth(end)}`;
+---
+
+<article class:list={['border-l border-border-muted pl-4', className]}>
+  <h3 class="text-h3 text-ink">{title}</h3>
+  <p class="mt-1 text-small text-ink">
+    {company}
+    <span class="text-ink-muted"> · {location}</span>
+  </p>
+  <p class="tabular-nums mt-1 text-micro text-ink-muted">{dateRange}</p>
+  {
+    highlights.length > 0 && (
+      <ul class="mt-2 flex flex-col gap-1">
+        {highlights.map((bullet) => (
+          <li class="flex gap-2 text-small text-ink-muted">
+            <span aria-hidden="true" class="text-accent">
+              ·
+            </span>
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</article>

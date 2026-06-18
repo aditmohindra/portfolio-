@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+  linkText?: string;
+  class?: string;
+}
+
+const { title, href, linkText, class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex flex-col gap-2 border-b border-border-muted pb-3 sm:flex-row sm:items-end sm:justify-between',
+    className,
+  ]}
+>
+  <h2 class="text-label text-ink">{title}</h2>
+  {
+    href && linkText && (
+      <a
+        href={href}
+        class="interactive-surface text-label text-accent-deep hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+      >
+        {linkText}
+      </a>
+    )
+  }
+</div>

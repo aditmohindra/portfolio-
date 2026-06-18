@@ -1,0 +1,37 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 32, class: className } = Astro.props;
+
+const cells = 4;
+const cellSize = size / cells;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox={`0 0 ${size} ${size}`}
+  class:list={['text-accent-deep opacity-50', className]}
+  aria-hidden="true"
+>
+  {
+    Array.from({ length: cells * cells }, (_, index) => {
+      const col = index % cells;
+      const row = Math.floor(index / cells);
+      if ((row + col) % 2 !== 0) return null;
+      return (
+        <rect
+          x={col * cellSize}
+          y={row * cellSize}
+          width={cellSize}
+          height={cellSize}
+          fill="currentColor"
+        />
+      );
+    })
+  }
+</svg>

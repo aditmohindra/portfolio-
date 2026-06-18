@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Card from '../components/ui/Card.astro';
+import WindowFrame from '../components/ui/WindowFrame.astro';
+import Tag from '../components/ui/Tag.astro';
+import Divider from '../components/ui/Divider.astro';
+import RecordSection from '../components/ui/RecordSection.astro';
+import ExternalLink from '../components/ui/ExternalLink.astro';
+import DecorativeGlobe from '../components/decor/DecorativeGlobe.astro';
+import DecorativeBarcode from '../components/decor/DecorativeBarcode.astro';
+import DecorativeStar from '../components/decor/DecorativeStar.astro';
+import DecorativeCrosshair from '../components/decor/DecorativeCrosshair.astro';
+---
+
+<BaseLayout title="Styleguide · Adit Mohindra" description="Design system primitives.">
+  <Container>
+    <div class="flex flex-col gap-section py-section">
+      <header class="border-b border-border-muted pb-block">
+        <p class="text-label text-accent-deep">Design system</p>
+        <h1 class="mt-2 text-h1 text-ink">Styleguide</h1>
+        <p class="prose-width mt-3 text-body text-ink-muted">
+          Phase 2A primitives — tokens, typography roles, and reusable Astro components. Flat,
+          border-only surfaces; no shadows.
+        </p>
+      </header>
+
+      <!-- Typography -->
+      <section aria-labelledby="sg-typography">
+        <SectionHeader title="Typography" />
+        <div class="mt-block flex flex-col gap-4">
+          <div class="border border-border-muted p-block">
+            <p class="text-label text-ink-muted">Font verification — standalone glyphs</p>
+            <p class="mt-3 text-display font-display text-ink">Mohindra</p>
+            <p class="mt-2 name-lockup-accent font-accent text-ink">Adit</p>
+          </div>
+          <div class="border border-border-muted p-block">
+            <p class="text-label text-ink-muted">Hero name lockup</p>
+            <p class="name-lockup mt-3 text-ink">
+              <span class="name-lockup-accent font-accent text-ink">Adit</span>
+              <span class="name-lockup-display text-display font-display">Mohindra</span>
+            </p>
+          </div>
+          <p class="text-small text-ink-muted">
+            <span class="font-display">font-display</span> (Cairo Pixel) for the large surname;{' '}
+            <span class="font-accent">font-accent</span> (Jacquard 12) for the accent given name. Tight
+            vertical lockup — accent line ~45% of display size.
+          </p>
+          <p class="text-h1 text-ink">Heading level 1</p>
+          <p class="text-h2 text-ink">Heading level 2</p>
+          <p class="text-h3 text-ink">Heading level 3</p>
+          <p class="text-body text-ink">
+            Body — JetBrains Mono at 1rem / 1.6 for recruiter-readable copy.
+          </p>
+          <p class="text-small text-ink-muted">Small muted secondary text (#525252 on canvas).</p>
+          <p class="text-label text-ink">Label — uppercase mono nav</p>
+          <p class="text-micro text-ink-muted">Micro metadata</p>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- Colors -->
+      <section aria-labelledby="sg-colors">
+        <SectionHeader title="Color tokens" />
+        <ul class="mt-block grid gap-grid sm:grid-cols-2 lg:grid-cols-4">
+          {
+            [
+              { name: 'canvas', class: 'bg-canvas border-border-muted' },
+              { name: 'surface', class: 'bg-surface border-border-muted' },
+              { name: 'accent-wash', class: 'bg-accent-wash border-border-muted' },
+              { name: 'accent', class: 'bg-accent border-border-ink text-ink-on-dark' },
+              { name: 'accent-deep', class: 'bg-accent-deep border-border-ink text-ink-on-dark' },
+              { name: 'surface-dark', class: 'bg-surface-dark border-border-ink text-ink-on-dark' },
+            ].map((swatch) => (
+              <li class:list={['border p-4 text-label', swatch.class]}>{swatch.name}</li>
+            ))
+          }
+        </ul>
+        <p class="prose-width mt-4 text-small text-ink-muted">
+          Accent lavender is for chrome and large type only — body copy stays ink / ink-muted for
+          WCAG AA contrast.
+        </p>
+      </section>
+
+      <Divider />
+
+      <!-- Buttons -->
+      <section aria-labelledby="sg-buttons">
+        <SectionHeader title="Buttons" />
+        <div class="mt-block flex flex-wrap gap-4">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="primary" href="#buttons"> Link primary </Button>
+        </div>
+        <p class="mt-4 text-small text-ink-muted">
+          Tab to any button above to preview <code class="text-ink">:focus-visible</code> rings.
+        </p>
+      </section>
+
+      <Divider />
+
+      <!-- Badges -->
+      <section aria-labelledby="sg-badges">
+        <SectionHeader title="Badges" />
+        <div class="mt-block flex flex-wrap gap-4">
+          <Badge>Bay Area</Badge>
+          <Badge statusDot statusLabel="Active project"> Currently building Spotify Atlas </Badge>
+          <Badge statusDot>Open to ML / DS roles</Badge>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- Tags -->
+      <section aria-labelledby="sg-tags">
+        <SectionHeader title="Tags" />
+        <div class="mt-block flex flex-wrap gap-2">
+          <Tag>Python</Tag>
+          <Tag>UMAP</Tag>
+          <Tag>embeddings</Tag>
+          <Tag>visualization</Tag>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- Cards -->
+      <section aria-labelledby="sg-cards">
+        <SectionHeader title="Cards" />
+        <div class="mt-block grid gap-grid md:grid-cols-3">
+          <Card>
+            <p class="text-h3">Default surface</p>
+            <p class="mt-2 text-small text-ink-muted">Flat 1px border, no shadow.</p>
+          </Card>
+          <Card variant="accent">
+            <p class="text-h3">Accent wash</p>
+            <p class="mt-2 text-small text-ink-muted">Muted lavender background.</p>
+          </Card>
+          <Card variant="dark">
+            <p class="text-h3">Dark surface</p>
+            <p class="mt-2 text-small text-ink-muted-on-dark">For flagship project cards.</p>
+          </Card>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- Window frame -->
+      <section aria-labelledby="sg-window">
+        <SectionHeader title="Window frame" />
+        <div class="mt-block max-w-md">
+          <WindowFrame title="ATLAS.EXE">
+            <p class="text-small text-ink-muted">
+              Generic OS chrome — reuse for case-study diagrams and previews.
+            </p>
+          </WindowFrame>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- Section header -->
+      <section aria-labelledby="sg-section-header">
+        <SectionHeader title="Section header example" href="/projects" linkText="View all →" />
+        <p class="mt-4 text-small text-ink-muted">Standalone demo of the section header pattern.</p>
+      </section>
+
+      <Divider />
+
+      <!-- Record section -->
+      <section aria-labelledby="sg-record-section">
+        <SectionHeader title="Record section" />
+        <p class="prose-width mt-4 text-small text-ink-muted">
+          Homepage record-card primitive — numbered SYS.RECORD header, bordered body, optional
+          trailing arrow link. Props: <code class="text-ink">number</code>,{' '}
+          <code class="text-ink">label</code>, optional <code class="text-ink">href</code> /{' '}
+          <code class="text-ink">linkLabel</code>.
+        </p>
+        <div class="mt-block flex flex-col gap-block">
+          <RecordSection number="01" label="PROJECTS" href="/projects">
+            <p class="text-small text-ink-muted">
+              Default slot for section content — project cards, lists, etc.
+            </p>
+          </RecordSection>
+          <RecordSection number="02" label="EXPERIENCE">
+            <p class="text-small text-ink-muted">
+              Arrow link omitted when <code class="text-ink">href</code> is not set.
+            </p>
+          </RecordSection>
+        </div>
+      </section>
+
+      <Divider />
+
+      <!-- External link -->
+      <section aria-labelledby="sg-external">
+        <SectionHeader title="External link" />
+        <p class="mt-block">
+          <ExternalLink href="https://example.com" label="Example project repo" />
+        </p>
+      </section>
+
+      <Divider />
+
+      <!-- Decorative -->
+      <section aria-labelledby="sg-decor">
+        <SectionHeader title="Decorative elements" />
+        <div class="mt-block flex flex-wrap items-end gap-8">
+          <div class="flex flex-col items-center gap-2">
+            <DecorativeGlobe size={32} />
+            <DecorativeGlobe size={64} />
+            <span class="text-micro text-ink-muted">Globe</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <DecorativeBarcode size={24} />
+            <DecorativeBarcode size={40} />
+            <span class="text-micro text-ink-muted">Barcode</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <DecorativeStar size={12} />
+            <DecorativeStar size={24} />
+            <span class="text-micro text-ink-muted">Star</span>
+          </div>
+          <div class="flex flex-col items-center gap-2">
+            <DecorativeCrosshair size={16} />
+            <DecorativeCrosshair size={32} />
+            <span class="text-micro text-ink-muted">Crosshair</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </Container>
+</BaseLayout>

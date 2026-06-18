@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  vertical?: boolean;
+}
+
+const { class: className, vertical = false } = Astro.props;
+---
+
+<hr
+  class:list={[
+    vertical
+      ? 'inline-block h-full min-h-4 w-px border-0 bg-border-muted'
+      : 'h-px w-full border-0 bg-border-muted',
+    className,
+  ]}
+  aria-hidden="true"
+/>

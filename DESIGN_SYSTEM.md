@@ -29,7 +29,7 @@ Design language extracted from the reference mockup: **retro-modern OS UI** + **
 | Four-pointed star | Logo, bullet prefix, corner marks |
 | Crosshair | Micro-decoration in hero corners |
 | Checker / wave block | About section accent |
-| Pixel art | Isometric map in hero window only — not site-wide |
+| ASCII art (density grid) | Contained decorative graphic inside window frames (hero ATLAS.EXE, optional case-study panels) — not site-wide |
 
 ### Borders & surfaces
 - **Border width:** 1px default (`border border-black/100` or token `--border`)
@@ -156,6 +156,7 @@ Design language extracted from the reference mockup: **retro-modern OS UI** + **
 | `SystemInfoPanel` | Label/value rows + gradient footer bar |
 | `DecorativeGlobe` | Wireframe SVG, low opacity |
 | `DecorativeCrosshair` | Corner SVG marks |
+| `AsciiArt` | Build-time density-character grid (`pre`, mono); reusable patterns (e.g. `bust`) for window-frame visuals |
 
 ### Projects
 
@@ -294,7 +295,7 @@ Motion supports orientation and delight; it never blocks reading or hurts perfor
 - ❌ Heavy glassmorphism, neumorphism, or excessive blur
 - ❌ Stock photo hero backgrounds
 - ❌ Clipart-style icons mixed with refined OS motifs
-- ❌ Competing display fonts (one pixel/display face only)
+- ❌ Full-page or full-width ASCII layouts (multi-column `<pre>` page structure); contained ASCII art inside a window frame or card is fine
 - ❌ Full-site dark mode mismatch at launch (pick light-first system)
 - ❌ Tiny low-contrast gray text for body copy
 

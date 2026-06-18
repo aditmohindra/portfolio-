@@ -1,0 +1,41 @@
+---
+import { siteConfig } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+import DecorativeStar from '../decor/DecorativeStar.astro';
+---
+
+<section class="relative overflow-x-clip py-section" aria-labelledby="hero-heading">
+  <div
+    class="pointer-events-none absolute -right-16 -top-16 size-64 bg-accent-wash opacity-80 lg:size-96"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative flex flex-col gap-block">
+    <p class="text-label text-ink">
+      <span class="mr-2 inline-block size-2.5 rounded-full bg-accent-deep" aria-hidden="true"
+      ></span>
+      {siteConfig.roleLine}
+    </p>
+
+    <h1 id="hero-heading" class="name-lockup text-ink">
+      <span class="name-lockup-accent font-accent text-ink">Adit</span>
+      <span class="name-lockup-display text-display font-display">Mohindra</span>
+    </h1>
+
+    <p class="prose-width text-body text-ink">{siteConfig.tagline}</p>
+
+    <div class="flex flex-wrap gap-4">
+      <Button variant="primary" href="/projects">View Projects</Button>
+      <Button variant="secondary" href="/resume">Resume</Button>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      <Badge>{siteConfig.location}</Badge>
+      <Badge>{siteConfig.availability}</Badge>
+      <Badge statusDot statusLabel="Active project">{siteConfig.currentBuild}</Badge>
+      <DecorativeStar size={12} class="hidden shrink-0 lg:block" />
+    </div>
+  </div>
+</section>

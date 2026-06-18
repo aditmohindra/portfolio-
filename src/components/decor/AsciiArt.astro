@@ -1,0 +1,108 @@
+---
+type AsciiPattern = 'bust';
+
+interface Props {
+  rows?: number;
+  cols?: number;
+  pattern?: AsciiPattern;
+  class?: string;
+}
+
+const DENSITY_CHARS = ' .:-=+*#%@';
+
+const { rows = 27, cols = 36, pattern = 'bust', class: className } = Astro.props;
+
+function pseudoHash(x: number, y: number): number {
+  const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+  return n - Math.floor(n);
+}
+
+function ellipseDistance(
+  x: number,
+  y: number,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+): number {
+  const dx = (x - cx) / rx;
+  const dy = (y - cy) / ry;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+/** Generic head / neck / shoulders — overlapping ellipses only, no facial detail. */
+function bustDensity(nx: number, ny: number): number {
+  const head = ellipseDistance(nx, ny, 0.5, 0.36, 0.19, 0.22);
+  const neck = ellipseDistance(nx, ny, 0.5, 0.56, 0.07, 0.08);
+  const shoulders = ellipseDistance(nx, ny, 0.5, 0.76, 0.36, 0.14);
+  const edgeDist = Math.min(head, neck, shoulders);
+  const hash = pseudoHash(nx, ny);
+
+  if (edgeDist >= 1) {
+    const outside = edgeDist - 1;
+    if (outside < 0.1 && hash < 0.14 * (1 - outside / 0.1)) {
+      return 0.06 + hash * 0.1;
+    }
+    return 0;
+  }
+
+  if (edgeDist > 0.7) {
+    const t = (edgeDist - 0.7) / 0.3;
+    return 0.1 + hash * 0.32 * (1 - t * 0.45);
+  }
+
+  const core = 1 - edgeDist / 0.7;
+  return 0.42 + core * 0.52 + (hash - 0.5) * 0.07;
+}
+
+function densityForCell(nx: number, ny: number, asciiPattern: AsciiPattern): number {
+  switch (asciiPattern) {
+    case 'bust':
+      return bustDensity(nx, ny);
+    default:
+      return 0;
+  }
+}
+
+function densityToChar(density: number): string {
+  if (density <= 0) return ' ';
+  const index = Math.min(DENSITY_CHARS.length - 1, Math.floor(density * DENSITY_CHARS.length));
+  return DENSITY_CHARS[index] ?? ' ';
+}
+
+function generateAsciiArt(
+  asciiRows: number,
+  asciiCols: number,
+  asciiPattern: AsciiPattern,
+): string {
+  const lines: string[] = [];
+
+  for (let row = 0; row < asciiRows; row += 1) {
+    let line = '';
+    for (let col = 0; col < asciiCols; col += 1) {
+      const nx = (col + 0.5) / asciiCols;
+      const ny = (row + 0.5) / asciiRows;
+      line += densityToChar(densityForCell(nx, ny, asciiPattern));
+    }
+    lines.push(line);
+  }
+
+  return lines.join('\n');
+}
+
+const asciiArt = generateAsciiArt(rows, cols, pattern);
+---
+
+<div class="size-full overflow-hidden [container-type:size]">
+  <div class="flex size-full items-center justify-center overflow-hidden p-2">
+    <pre
+      class:list={[
+        'm-0 max-h-full max-w-full overflow-hidden whitespace-pre font-mono leading-[0.92] text-current',
+        className,
+      ]}
+      style={{
+        fontSize: `min(calc(100cqmin / ${cols} * 1.62), calc(100cqmin / ${rows} * 0.95))`,
+      }}
+      aria-hidden="true">{asciiArt}</pre>
+  </div>
+</div>

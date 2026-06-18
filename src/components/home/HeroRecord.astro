@@ -1,0 +1,61 @@
+---
+import RecordSection from '../ui/RecordSection.astro';
+import Button from '../ui/Button.astro';
+import AsciiArtStatic from '../decor/AsciiArtStatic.astro';
+import { siteConfig } from '../../data/site';
+---
+
+<RecordSection number="01" label="HERO" showPanelChrome class="overflow-visible">
+  <div class="relative overflow-visible">
+    <div class="relative z-10 flex max-w-[min(100%,34rem)] flex-col gap-3 sm:gap-4">
+      <h1 class="name-lockup name-lockup-hero text-ink">
+        <span class="name-lockup-accent font-accent text-ink">Adit</span>
+        <span class="name-lockup-display text-display font-display">Mohindra</span>
+      </h1>
+      <p class="text-label text-accent-deep">{siteConfig.heroAccentLine}</p>
+      <p class="text-body text-ink">{siteConfig.heroPositioning}</p>
+      <p class="text-small text-ink-muted">{siteConfig.heroBio}</p>
+      <div class="flex flex-wrap gap-4">
+        <Button variant="primary" href="/projects">
+          View Projects
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7M17 7H9M17 7V15"></path>
+          </svg>
+        </Button>
+        <Button variant="secondary" href={siteConfig.resumeHref}>
+          Resume
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            aria-hidden="true"
+          >
+            <path d="M12 3v12M8 11l4 4 4-4M5 21h14"></path>
+          </svg>
+        </Button>
+      </div>
+    </div>
+
+    <div
+      class="pointer-events-none absolute -right-4 -top-10 z-[2] sm:-right-6 sm:-top-12 lg:-right-8 lg:-top-14"
+      aria-hidden="true"
+    >
+      <AsciiArtStatic class="text-[0.55rem] leading-none sm:text-[0.62rem] lg:text-[0.75rem]" />
+    </div>
+  </div>
+</RecordSection>

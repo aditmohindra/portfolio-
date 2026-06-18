@@ -1,0 +1,23 @@
+---
+type Variant = 'default' | 'dark' | 'accent';
+
+interface Props {
+  variant?: Variant;
+  class?: string;
+  as?: 'div' | 'article' | 'section';
+}
+
+const { variant = 'default', class: className, as: Tag = 'div' } = Astro.props;
+
+const resolvedVariant: Variant = variant;
+
+const variants: Record<Variant, string> = {
+  default: 'border-border-ink bg-surface text-ink',
+  dark: 'border-border-ink bg-surface-dark text-ink-on-dark',
+  accent: 'border-border-ink bg-accent-wash text-ink',
+};
+---
+
+<Tag class:list={['border p-block interactive-surface', variants[resolvedVariant], className]}>
+  <slot />
+</Tag>

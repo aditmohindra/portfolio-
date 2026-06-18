@@ -1,0 +1,59 @@
+---
+type AwardIcon = 'trophy' | 'medal' | 'star' | 'certificate';
+
+interface Props {
+  title: string;
+  issuer: string;
+  date: string;
+  description?: string;
+  icon?: AwardIcon;
+  link?: string;
+  class?: string;
+}
+
+const { title, issuer, date, description, icon = 'star', link, class: className } = Astro.props;
+
+const iconPaths: Record<AwardIcon, string> = {
+  trophy:
+    'M8 2h8v3a4 4 0 0 1-8 0V2zm-2 0H4a1 1 0 0 0-1 1v1a3 3 0 0 0 3 3h1V2zm12 0h-2v5h1a3 3 0 0 0 3-3V3a1 1 0 0 0-1-1zM10 14v3H8v1h8v-1h-2v-3',
+  medal: 'M12 2l2 4 4.5.7-3.2 3.2.8 4.6L12 12.5 7.9 14.5l.8-4.6L5.5 6.7 10 6l2-4z',
+  star: 'M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.8l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z',
+  certificate: 'M6 3h12v14H6V3zm2 2v10h8V5H8zm1 12h6l-3 3-3-3z',
+};
+---
+
+<div class:list={['flex gap-3', className]}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="square"
+    class="mt-0.5 shrink-0 text-accent-deep"
+    aria-hidden="true"
+  >
+    <path d={iconPaths[icon]}></path>
+  </svg>
+  <div class="min-w-0 flex-1">
+    {
+      link ? (
+        <a
+          href={link}
+          class="interactive-surface text-h3 text-ink hover:text-accent-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+        >
+          {title}
+        </a>
+      ) : (
+        <p class="text-h3 text-ink">{title}</p>
+      )
+    }
+    <p class="mt-0.5 text-small text-ink-muted">
+      {issuer}
+      <span class="tabular-nums"> · {date}</span>
+    </p>
+    {description && <p class="mt-1 text-small text-ink-muted">{description}</p>}
+  </div>
+</div>

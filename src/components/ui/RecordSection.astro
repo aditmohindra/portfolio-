@@ -1,0 +1,76 @@
+---
+interface Props {
+  /** Record index, e.g. "01" */
+  number: string;
+  /** Section label, e.g. "PROJECTS" */
+  label: string;
+  /** Optional destination for the trailing arrow link */
+  href?: string;
+  /** Accessible label for the arrow link; defaults to "View {label}" */
+  linkLabel?: string;
+  /** Decorative window chrome — drag dots + resize grip */
+  showPanelChrome?: boolean;
+  class?: string;
+}
+
+const { number, label, href, linkLabel, showPanelChrome = false, class: className } = Astro.props;
+const arrowLabel = linkLabel ?? `View ${label.toLowerCase()}`;
+---
+
+<section
+  class:list={['border border-border-ink bg-surface', className]}
+  aria-labelledby={`record-${number}-heading`}
+>
+  <header
+    class="flex items-center justify-between gap-4 border-b border-border-muted px-block py-3"
+  >
+    <div class="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
+      <span class="text-micro text-ink-muted">SYS.RECORD</span>
+      <span id={`record-${number}-heading`} class="text-label text-accent-deep tabular-nums">
+        {number}
+      </span>
+      <span class="text-label text-ink">{label}</span>
+    </div>
+    <div class="flex shrink-0 items-center gap-3">
+      {
+        showPanelChrome && (
+          <span class="text-micro leading-none tracking-[0.2em] text-ink-muted" aria-hidden="true">
+            :::
+          </span>
+        )
+      }
+      {
+        href && (
+          <a
+            href={href}
+            class="interactive-surface inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center text-label text-accent-deep hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+            aria-label={arrowLabel}
+          >
+            <span aria-hidden="true">→</span>
+          </a>
+        )
+      }
+    </div>
+  </header>
+  <div class="relative overflow-visible p-block">
+    <slot />
+    {
+      showPanelChrome && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          class="pointer-events-none absolute bottom-3 right-3 text-ink-muted"
+          aria-hidden="true"
+        >
+          <path d="M14 10l7 7M17 17h4v4M10 14l-7 7M7 17H3v4" />
+        </svg>
+      )
+    }
+  </div>
+</section>

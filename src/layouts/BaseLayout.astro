@@ -6,10 +6,15 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  /** `portfolio` omits global header/footer — homepage uses PortfolioShell instead. */
+  layout?: 'default' | 'portfolio';
 }
 
-const { title, description = 'Adit Mohindra — Data Scientist / ML Engineer / AI Engineer' } =
-  Astro.props;
+const {
+  title,
+  description = 'Adit Mohindra — Data Scientist / ML Engineer / AI Engineer',
+  layout = 'default',
+} = Astro.props;
 
 const pathname = Astro.url.pathname;
 
@@ -19,12 +24,13 @@ function isActive(href: string): boolean {
 }
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Experience', href: '/experience' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Resume', href: '/resume' },
+  { label: 'HOME', href: '/' },
+  { label: 'PROJECTS', href: '/projects' },
+  { label: 'EXPERIENCE', href: '/experience' },
+  { label: 'AWARDS', href: '/awards' },
+  { label: 'ABOUT', href: '/about' },
+  { label: 'CONTACT', href: '/contact' },
+  { label: 'RESUME', href: '/resume' },
 ];
 ---
 
@@ -39,10 +45,20 @@ const navItems = [
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    <SiteHeader navItems={navItems} isActive={isActive} />
-    <main id="main">
-      <slot />
-    </main>
-    <SiteFooter />
+    {
+      layout === 'default' ? (
+        <>
+          <SiteHeader navItems={navItems} isActive={isActive} />
+          <main id="main">
+            <slot />
+          </main>
+          <SiteFooter />
+        </>
+      ) : (
+        <main id="main">
+          <slot />
+        </main>
+      )
+    }
   </body>
 </html>

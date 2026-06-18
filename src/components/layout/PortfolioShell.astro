@@ -1,0 +1,59 @@
+---
+import PortfolioSidebar from './PortfolioSidebar.astro';
+
+/** Placeholder session id — decorative until dynamic wiring in a later stage. */
+const sessionId = 'SES-0x4F2A1B';
+---
+
+<div class="portfolio-shell min-h-screen overflow-x-hidden bg-page p-grid">
+  <div class="mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-grid lg:flex-row lg:items-stretch">
+    <PortfolioSidebar />
+
+    <div class="flex min-w-0 flex-1 flex-col gap-grid">
+      <header
+        class="flex shrink-0 items-center justify-between gap-4 border border-border-ink bg-surface px-4 py-2.5 sm:px-6"
+      >
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="currentColor"
+            class="shrink-0 text-ink-muted"
+            aria-hidden="true"
+          >
+            <circle cx="2" cy="2" r="1"></circle>
+            <circle cx="6" cy="2" r="1"></circle>
+            <circle cx="10" cy="2" r="1"></circle>
+            <circle cx="2" cy="6" r="1"></circle>
+            <circle cx="6" cy="6" r="1"></circle>
+            <circle cx="10" cy="6" r="1"></circle>
+            <circle cx="2" cy="10" r="1"></circle>
+            <circle cx="6" cy="10" r="1"></circle>
+            <circle cx="10" cy="10" r="1"></circle>
+          </svg>
+          <p class="text-label text-ink">PORTFOLIO.SYSTEM</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-micro tabular-nums text-ink-muted">{sessionId}</span>
+          <span
+            class="size-2 shrink-0 rounded-full bg-status-active"
+            role="img"
+            aria-label="System online"></span>
+        </div>
+      </header>
+
+      <div class="flex min-w-0 flex-1 flex-col gap-grid overflow-visible">
+        <slot />
+      </div>
+
+      <footer
+        class="flex shrink-0 items-center justify-between gap-4 border border-border-ink bg-surface px-4 py-2.5 sm:px-6"
+      >
+        <p class="text-label text-ink-muted">Thanks for visiting</p>
+        <p class="text-micro text-ink-muted">END OF TRANSMISSION</p>
+      </footer>
+    </div>
+  </div>
+</div>

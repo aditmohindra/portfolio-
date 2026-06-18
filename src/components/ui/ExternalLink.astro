@@ -1,0 +1,52 @@
+---
+interface Props {
+  href: string;
+  label?: string;
+  class?: string;
+  showIcon?: boolean;
+  iconOnly?: boolean;
+  newTab?: boolean;
+}
+
+const {
+  href,
+  label,
+  class: className,
+  showIcon = true,
+  iconOnly = false,
+  newTab = true,
+} = Astro.props;
+
+const linkLabel = label ?? href;
+const isExternal = newTab && !href.startsWith('mailto:');
+---
+
+<a
+  href={href}
+  class:list={[
+    'interactive-surface inline-flex min-h-11 items-center gap-1.5 text-small text-ink underline-offset-4 hover:text-accent-deep hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+    className,
+  ]}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+  <span class:list={[iconOnly && 'sr-only']}><slot>{linkLabel}</slot></span>
+  {
+    showIcon && isExternal && (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="square"
+        aria-hidden="true"
+      >
+        <path d="M7 17L17 7M17 7H9M17 7V15" />
+      </svg>
+    )
+  }
+  {isExternal && <span class="sr-only"> (opens in new tab)</span>}
+</a>

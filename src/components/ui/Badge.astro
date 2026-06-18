@@ -1,0 +1,28 @@
+---
+interface Props {
+  statusDot?: boolean;
+  statusLabel?: string;
+  class?: string;
+}
+
+const { statusDot = false, statusLabel, class: className } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex min-h-11 items-center gap-2 rounded-pill border border-border-ink bg-surface px-3 py-1 text-micro uppercase tracking-wide text-ink',
+    className,
+  ]}
+>
+  {
+    statusDot && (
+      <span
+        class="size-2 shrink-0 rounded-full bg-status-active"
+        aria-hidden={statusLabel ? undefined : true}
+        role={statusLabel ? 'img' : undefined}
+        aria-label={statusLabel}
+      />
+    )
+  }
+  <slot />
+</span>
