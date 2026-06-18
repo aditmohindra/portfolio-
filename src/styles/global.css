@@ -187,6 +187,43 @@
     line-height: 0.95;
   }
 
+  .sidebar-facts-list {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .sidebar-section {
+    padding-block: var(--spacing-block);
+  }
+
+  /** Homepage shell — main-first DOM; grid areas swap column placement at lg+ */
+  .portfolio-layout {
+    display: grid;
+    gap: var(--spacing-grid);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'main'
+      'sidebar';
+  }
+
+  .portfolio-layout__main {
+    grid-area: main;
+  }
+
+  .portfolio-layout__sidebar {
+    grid-area: sidebar;
+  }
+
+  @media (min-width: 1024px) {
+    .portfolio-layout {
+      grid-template-columns: 18rem minmax(0, 1fr);
+      grid-template-areas: 'sidebar main';
+      align-items: stretch;
+    }
+  }
+
   /** Hero record — Jacquard 12 renders crisp at font-sizes divisible by 12px (0.75rem @ 16px root) */
   .name-lockup-hero .name-lockup-accent {
     font-size: 3.75rem;
@@ -203,9 +240,45 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) and (min-height: 961px) {
     .name-lockup-hero .name-lockup-accent {
       font-size: 6rem;
+    }
+  }
+
+  /**
+   * Short desktop (≥1024px wide, ≤960px tall): tighten quick-facts density
+   * for ~900px viewport target. Body text sizes unchanged; page scrolls
+   * normally below this threshold.
+   */
+  @media (min-width: 1024px) and (max-height: 960px) {
+    .portfolio-shell {
+      --spacing-grid: 0.75rem;
+      padding: 0.75rem;
+    }
+
+    .name-lockup-hero .name-lockup-accent {
+      font-size: 4.5rem;
+    }
+
+    .name-lockup-hero .name-lockup-display {
+      font-size: 4.5rem;
+      line-height: 0.95;
+    }
+
+    .sidebar-section--facts {
+      padding-block: 0.375rem;
+    }
+
+    .sidebar-facts-list {
+      margin-top: 0.375rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar-facts-list > div {
+      gap: 0.375rem;
     }
   }
 

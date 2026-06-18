@@ -1,7 +1,5 @@
 ---
 import ExternalLink from '../ui/ExternalLink.astro';
-import { Image } from 'astro:assets';
-import portrait from '../../assets/images/portrait.png';
 import { siteConfig } from '../../data/site';
 
 const quickFacts = [
@@ -99,7 +97,7 @@ const iconPaths = {
 >
   <!-- Identity -->
   <section
-    class="border-b border-border-muted px-block py-block"
+    class="sidebar-section border-b border-border-muted px-block"
     aria-labelledby="sidebar-identity"
   >
     <p id="sidebar-identity" class="text-micro text-ink-muted">SYS/USER</p>
@@ -114,25 +112,13 @@ const iconPaths = {
     </div>
   </section>
 
-  <!-- Portrait (frame labels are baked into the image asset) -->
-  <section class="border-b border-border-muted px-block py-block" aria-label="User portrait">
-    <Image
-      src={portrait}
-      alt="Pixel art portrait of Adit Mohindra in a system-style frame"
-      width={576}
-      height={576}
-      widths={[288, 576]}
-      quality={100}
-      format="png"
-      class="aspect-square w-full [image-rendering:pixelated]"
-      loading="eager"
-    />
-  </section>
-
   <!-- Quick facts -->
-  <section class="border-b border-border-muted px-block py-block" aria-labelledby="sidebar-facts">
+  <section
+    class="sidebar-section sidebar-section--facts border-b border-border-muted px-block"
+    aria-labelledby="sidebar-facts"
+  >
     <p id="sidebar-facts" class="text-micro text-ink-muted">QUICK.FACTS</p>
-    <dl class="mt-3 flex flex-col gap-2.5">
+    <dl class="sidebar-facts-list">
       {
         quickFacts.map((fact) => (
           <div class="flex gap-2.5">
@@ -161,7 +147,10 @@ const iconPaths = {
   </section>
 
   <!-- Contact -->
-  <section class="border-b border-border-muted px-block py-block" aria-labelledby="sidebar-contact">
+  <section
+    class="sidebar-section border-b border-border-muted px-block"
+    aria-labelledby="sidebar-contact"
+  >
     <p id="sidebar-contact" class="text-micro text-ink-muted">CONTACT</p>
     <nav class="mt-3" aria-label="Contact links">
       <ul class="flex flex-col gap-1">
@@ -203,7 +192,7 @@ const iconPaths = {
   </section>
 
   <!-- Status (decorative) -->
-  <section class="px-block py-block" aria-labelledby="sidebar-status">
+  <section class="sidebar-section px-block" aria-labelledby="sidebar-status">
     <div class="flex items-center gap-2">
       <p id="sidebar-status" class="text-micro text-ink-muted">SYSTEM OPERATIONAL</p>
       <span
