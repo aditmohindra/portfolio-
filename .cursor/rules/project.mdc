@@ -1,0 +1,57 @@
+---
+description: Project scope, stack, and repository conventions for the Adit Mohindra portfolio
+alwaysApply: true
+---
+
+# Project Rules
+
+## Scope & stack
+
+- **Stack:** Astro 5, TypeScript (strict), Tailwind CSS v4 (CSS-first `@theme`), React islands only where needed, MDX content collections.
+- **Hosting:** Optimize for **Cloudflare Pages** static deploy (`dist/`). No SSR adapter in MVP.
+- **Static-first:** Default to `.astro` pages with zero client JS. Use `client:visible` or `client:idle` for islands — never `client:load` unless justified.
+- **Single source of truth:** `CONTENT_INVENTORY.md` for routes and content shape; `DESIGN_SYSTEM.md` for tokens and components; `PROJECT_BRIEF.md` for scope boundaries.
+
+## File organization
+
+```
+src/
+  components/layout/   # Layout shell components
+  components/ui/       # Reusable UI components
+  components/islands/  # React islands only
+  content/             # MDX + data collections
+  data/                # Static data not in collections (if needed)
+  layouts/
+  pages/
+  styles/
+public/
+  decor/
+  resume/
+```
+
+## Dependencies
+
+- Do not add packages without a clear need.
+- Prefer Astro builtins and Tailwind over CSS-in-JS.
+- No CMS, database, or auth libraries in MVP.
+- Do **not** add `@astrojs/cloudflare` or `@astrojs/tailwind` (use `@tailwindcss/vite`).
+
+## Git & deploy
+
+- Conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `chore:`
+- Never commit `.env` or API keys.
+- Ensure `npm run build` passes before marking work complete.
+
+## Non-goals
+
+- Blog, admin UI, contact form backend, user accounts
+- Pixel-perfect mockup clone
+- Site-wide React router or SPA architecture
+
+## When implementing a task
+
+1. Read `PROJECT_BRIEF.md` — confirm MVP scope.
+2. Check `CONTENT_INVENTORY.md` — use correct frontmatter and sections.
+3. Apply tokens/components from `DESIGN_SYSTEM.md`.
+4. Implement minimal diff; no drive-by refactors.
+5. Run `npm run build`, `npm run check`, and `npm run lint`.

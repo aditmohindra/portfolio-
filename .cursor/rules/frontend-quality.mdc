@@ -1,0 +1,41 @@
+---
+description: Astro, TypeScript, Tailwind, and React island quality standards
+globs: "**/*.{astro,ts,tsx,css}"
+alwaysApply: false
+---
+
+# Frontend Quality Rules
+
+## Astro patterns
+
+- Use `getCollection()` and content schemas (Zod) in `src/content/config.ts` for projects, experience, and awards.
+- Pass collection data as props; do not duplicate content in page files.
+- MDX: shared prose layout for case studies (Phase 2+).
+- Images: explicit dimensions to prevent CLS when added.
+
+## TypeScript
+
+- `strict: true` via `astro/tsconfigs/strict`. No `any` without comment.
+
+## React islands
+
+- Islands live in `src/components/islands/`.
+- Maximum island scope: single interactive widget.
+- Pass serializable props only. No global state libraries in MVP.
+- Do not create React components unless interactivity is required.
+
+## Performance budget
+
+- Homepage JS gzipped target: **< 100KB** (excluding analytics).
+- Fonts: max 2 families + mono; `font-display: swap`.
+- No third-party scripts on critical path without approval.
+
+## Code style
+
+- Match existing file conventions when editing.
+- Prefer small, focused components over monolithic page files.
+- Delete unused code and imports in files you touch.
+
+## Before merge
+
+- Run `npm run build`, `npm run check`, and `npm run lint`.

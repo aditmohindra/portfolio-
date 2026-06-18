@@ -1,0 +1,40 @@
+---
+description: Accessibility requirements for all pages and components
+globs: "**/*.{astro,tsx,css}"
+alwaysApply: false
+---
+
+# Accessibility Rules
+
+## Required on every page
+
+- `<html lang="en">`
+- Skip link to `#main`
+- Single `h1`, logical heading hierarchy
+- `main`, `nav`, `footer` landmarks
+
+## Interactive elements
+
+- Visible focus styles using `--color-focus-ring` (never `outline: none` without replacement).
+- Touch targets ≥ 44×44px.
+- Links must have discernible text.
+
+## Images & decoration
+
+- Meaningful `alt` on content images.
+- Decorative SVGs: `aria-hidden="true"`.
+- Status indicators: text + icon/color (e.g. "Active" + green dot).
+
+## Color & contrast
+
+- Body text ≥ 4.5:1 contrast on backgrounds.
+- Do not use `accent` alone for small body text on white.
+
+## Motion
+
+- Honor `prefers-reduced-motion` (defined in `global.css`).
+
+## Testing before merge
+
+- Keyboard-only navigation through header → main → footer.
+- Screen reader spot-check: page title and `h1` announce correctly.

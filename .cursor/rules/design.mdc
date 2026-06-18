@@ -1,0 +1,40 @@
+---
+description: Visual design language and UI conventions from DESIGN_SYSTEM.md
+globs: "**/*.{astro,css,tsx}"
+alwaysApply: false
+---
+
+# Design Rules
+
+## Visual language
+
+- Follow **retro-modern OS UI + editorial layout** from `DESIGN_SYSTEM.md`.
+- Page background: off-white (`bg-canvas` / `#F2F2F2`). Primary borders: 1px black/near-black.
+- Accents: muted lavender-blue (`accent` / `#7B8CDE`) — not bright royal blue or purple gradients.
+- Motifs (globe, barcode, star, OS window) are **decorative**. They must not compete with headlines or CTAs.
+
+## Typography
+
+- **Display/pixel font:** Hero name only.
+- **Body:** Sans-serif. **Labels/nav/badges:** Monospace uppercase.
+- Section labels: ALL CAPS, mono, letter-spaced — e.g. `FEATURED PROJECTS`.
+- Max prose width ~65ch on about and case studies.
+
+## Components
+
+- Build from `DESIGN_SYSTEM.md` component inventory before one-off markup.
+- Buttons: primary (black fill), secondary (white + border). Never icon-only without `aria-label`.
+- Project cards use variants: `dark-globe`, `blue-cube`, `light-browser`, `light-wave`.
+- Shadows: avoid unless necessary; prefer borders.
+
+## Responsive & motion
+
+- Mobile-first Tailwind. Test at 375px before marking UI complete.
+- Hero stacks on mobile (copy first, visual second).
+- Transitions ≤ 300ms. Honor `prefers-reduced-motion`.
+- No parallax, scroll-jacking, or cursor effects.
+
+## Tailwind tokens
+
+- Use semantic tokens (`bg-canvas`, `text-ink`, `border-ink`, `accent`) — not raw hex in components except `global.css` `@theme`.
+- Tailwind v4 is CSS-first via `@theme` in `src/styles/global.css`. No `tailwind.config.js`.

@@ -1,0 +1,9 @@
+dist/
+.astro/
+node_modules/
+PROJECT_BRIEF.md
+CONTENT_INVENTORY.md
+DESIGN_SYSTEM.md
+ROADMAP.md
+CURSOR_RULES_DRAFT.md
+.cursor/

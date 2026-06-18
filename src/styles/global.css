@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-canvas: #f2f2f2;
+  --color-surface: #fafafa;
+  --color-surface-dark: #1a1a1a;
+  --color-ink: #0a0a0a;
+  --color-ink-muted: #5c5c5c;
+  --color-border-ink: #0a0a0a;
+  --color-border-muted: #d4d4d4;
+  --color-accent: #7b8cde;
+  --color-accent-deep: #5a6bb5;
+  --color-accent-wash: #e8ebf8;
+  --color-accent-glow: #c5d0f0;
+  --color-status-active: #1db954;
+  --color-focus-ring: #5a6bb5;
+
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --spacing-section: 4rem;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-surface focus:px-4 focus:py-2 focus:text-ink;
+  }
+}

@@ -1,0 +1,40 @@
+---
+description: Content voice, structure, and accuracy for portfolio copy and MDX
+globs: "**/*.{mdx,md,yaml,yml,astro}"
+alwaysApply: false
+---
+
+# Content Writing Rules
+
+## Voice
+
+- **Adit Mohindra** — first person optional on About; neutral on resume.
+- Tone: confident, specific, recruiter-scannable. No filler ("passionate about", "leveraging synergies").
+- Lead with **outcome**, then method, then stack.
+
+## Role positioning
+
+- Always clarify: **Data Scientist / ML Engineer / AI Engineer**.
+- Spotify Atlas is the **flagship** — mention in hero, resume, and OG description.
+
+## Structure
+
+- Card descriptions: ≤ 120 characters when possible.
+- Experience bullets: start with strong verbs; include metrics where truthful.
+- Case studies follow `CONTENT_INVENTORY.md` section order.
+- Tech stacks: mono, dot-separated — `Python · UMAP · HDBSCAN`.
+
+## Accuracy
+
+- No fabricated metrics, employers, or awards.
+- Mark unknown copy as `<!-- DRAFT: needs Adit -->` in MDX, not lorem ipsum on launch copy.
+- External links: verify URLs. Use `target="_blank"` + `rel="noopener noreferrer"`.
+
+## SEO copy
+
+- Unique `<title>` and `description` per page.
+- First paragraph of case studies should stand alone as a summary.
+
+## Homepage 5-second test
+
+A visitor must immediately see: name, role, what you build, Spotify Atlas as proof, View Projects + Resume CTAs.
