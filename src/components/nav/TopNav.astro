@@ -1,0 +1,65 @@
+---
+import { siteConfig } from '../../data/site';
+
+const pathname = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'Awards', href: '/awards' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Resume', href: siteConfig.resumeHref },
+  { label: 'Creative', href: '/creative' },
+];
+---
+
+<nav
+  aria-label="Main navigation"
+  class="top-nav sticky top-0 z-50 w-full border-b border-border-ink bg-[rgba(255,255,255,0.85)] backdrop-blur-[8px]"
+>
+  <div
+    class="mx-auto flex w-full max-w-[min(95vw,100rem)] items-center justify-between gap-4 px-4 py-2.5 sm:px-6"
+  >
+    <a
+      href="/"
+      class="font-nav text-label font-normal uppercase text-ink interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+    >
+      ADIT MOHINDRA
+    </a>
+
+    <div
+      class="top-nav__links font-nav flex flex-wrap items-center justify-end text-label font-normal uppercase"
+    >
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+              isActive(item.href) ? 'text-accent' : 'text-ink-muted hover:text-ink',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<style>
+  .top-nav__links > a:not(:first-child)::before {
+    content: '·';
+    margin-inline: 0.5rem;
+    color: var(--color-ink-muted);
+    pointer-events: none;
+  }
+</style>

@@ -1,12 +1,12 @@
 ---
-import SiteHeader from '../components/layout/SiteHeader.astro';
+import TopNav from '../components/nav/TopNav.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
-  /** `portfolio` omits global header/footer — homepage uses PortfolioShell instead. */
+  /** `portfolio` omits global footer — homepage uses PortfolioShell instead. */
   layout?: 'default' | 'portfolio';
 }
 
@@ -15,23 +15,6 @@ const {
   description = 'Adit Mohindra — Data Scientist / ML Engineer / AI Engineer',
   layout = 'default',
 } = Astro.props;
-
-const pathname = Astro.url.pathname;
-
-function isActive(href: string): boolean {
-  if (href === '/') return pathname === '/';
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
-const navItems = [
-  { label: 'HOME', href: '/' },
-  { label: 'PROJECTS', href: '/projects' },
-  { label: 'EXPERIENCE', href: '/experience' },
-  { label: 'AWARDS', href: '/awards' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'CONTACT', href: '/contact' },
-  { label: 'RESUME', href: '/resume' },
-];
 ---
 
 <!doctype html>
@@ -41,24 +24,20 @@ const navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
     <title>{title}</title>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    {
-      layout === 'default' ? (
-        <>
-          <SiteHeader navItems={navItems} isActive={isActive} />
-          <main id="main">
-            <slot />
-          </main>
-          <SiteFooter />
-        </>
-      ) : (
-        <main id="main">
-          <slot />
-        </main>
-      )
-    }
+    <TopNav />
+    <main id="main" class="main-with-nav">
+      <slot />
+    </main>
+    {layout === 'default' ? <SiteFooter /> : null}
   </body>
 </html>

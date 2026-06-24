@@ -1,7 +1,6 @@
 ---
 import RecordSection from '../ui/RecordSection.astro';
-import Divider from '../ui/Divider.astro';
-import ProjectListItem from '../projects/ProjectListItem.astro';
+import ProjectCard from '../projects/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 const homepageProjects = (await getCollection('projects'))
@@ -10,14 +9,16 @@ const homepageProjects = (await getCollection('projects'))
 ---
 
 <RecordSection number="02" label="PROJECTS" href="/projects" linkLabel="View all projects">
-  <div>
-    {
-      homepageProjects.map((project, index) => (
-        <>
-          <ProjectListItem project={project} />
-          {index < homepageProjects.length - 1 && <Divider class="my-block" />}
-        </>
-      ))
-    }
+  <div class="projects-card-grid">
+    {homepageProjects.map((project) => <ProjectCard project={project} />)}
   </div>
 </RecordSection>
+
+<style>
+  .projects-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: var(--spacing-grid);
+  }
+</style>
