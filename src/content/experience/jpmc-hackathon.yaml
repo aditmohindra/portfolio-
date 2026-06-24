@@ -1,0 +1,12 @@
+role: Data for Good Hackathon
+company: J.P. Morgan
+location: Columbus, OH
+start: Oct 2023
+end: Oct 2023
+homepage: false
+bullets:
+  - Developed a data-driven recommendation system identifying optimal geographic regions for nonprofit StarHouse's expansion.
+  - Designed a multi-factor weighting algorithm scoring regions on socioeconomic status, educational access, youth population density, and community resources.
+  - Leveraged decision trees and clustering to evaluate need-based patterns and predict high-impact expansion zones.
+  - Presented findings to JPMorgan executives and nonprofit leaders; praised for delivering a scalable, mission-aligned solution.
+stack: [Python, ML, Clustering]

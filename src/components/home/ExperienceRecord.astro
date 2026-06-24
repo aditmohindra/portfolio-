@@ -4,14 +4,15 @@ import Divider from '../ui/Divider.astro';
 import ExperienceItem from './ExperienceItem.astro';
 import { getCollection } from 'astro:content';
 
-function parseStartDate(value: string): number {
+function parseEndDate(value: string): number {
+  if (value === 'Present') return Number.MAX_SAFE_INTEGER;
   const parsed = Date.parse(value);
   return Number.isNaN(parsed) ? 0 : parsed;
 }
 
-const experienceEntries = (await getCollection('experience')).sort(
-  (a, b) => parseStartDate(b.data.start) - parseStartDate(a.data.start),
-);
+const experienceEntries = (await getCollection('experience'))
+  .filter((entry) => entry.data.homepage)
+  .sort((a, b) => parseEndDate(b.data.end) - parseEndDate(a.data.end));
 ---
 
 <RecordSection number="03" label="EXPERIENCE" href="/experience" linkLabel="View all">

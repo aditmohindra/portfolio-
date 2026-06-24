@@ -1,0 +1,15 @@
+role: Machine Learning Researcher
+company: CoreLogic
+location: Irvine, CA
+start: Jan 2025
+end: Jun 2025
+homepage: true
+bullets:
+  - Awarded First Place at the 2025 UCI ICS Project Expo among 300+ participants.
+  - Designed and delivered an end-to-end predictive ML system quantifying ZIP-level real estate market hotness using CoreLogic proprietary data and external economic indicators.
+  - Developed a proxy modeling framework with K-Means clustering to predict key housing market signals informed by expert interviews and feature engineering.
+  - Built a unified data pipeline integrating listings, transactions, viewership, and mortgage activity into an analytics-ready structure.
+  - Trained and optimized XGBoost and SARIMA models for time-series forecasting of market hotness across geographies.
+  - Created an interactive dashboard for investors and analysts to explore real-time market dynamics and predictive analytics.
+  - Led a 4-member team through Agile workflows, coordinating sprints and stakeholder engagements with CoreLogic mentors.
+stack: [Python, XGBoost, SARIMA, K-Means, ML]

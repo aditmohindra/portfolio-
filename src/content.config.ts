@@ -2,7 +2,6 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
-const projectStatus = z.enum(['Active', 'Completed', 'Archived']);
 const cardVariant = z.enum(['dark-globe', 'blue-cube', 'light-browser', 'light-wave']);
 const awardIcon = z.enum(['trophy', 'medal', 'star', 'certificate']);
 
@@ -16,7 +15,7 @@ const projects = defineCollection({
     order: z.number(),
     role: z.string(),
     timeline: z.string(),
-    status: projectStatus,
+    status: z.string().optional(),
     summary: z.string(),
     tags: z.array(z.string()),
     stack: z.array(z.string()),
@@ -40,6 +39,7 @@ const experience = defineCollection({
     location: z.string(),
     start: z.string(),
     end: z.string(),
+    homepage: z.boolean().default(false),
     bullets: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
   }),

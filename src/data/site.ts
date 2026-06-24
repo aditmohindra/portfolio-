@@ -19,13 +19,12 @@ export const siteConfig = {
     'Data scientist and ML engineer focused on applied machine learning — pipelines, embeddings, clustering, and the product layer that makes models useful. Flagship work includes Spotify Atlas, an interactive music intelligence platform built from personal listening data. Comfortable across Python, SQL, visualization, and interactive tooling; looking for roles where I can ship end-to-end data products with measurable impact.',
   location: 'Bay Area',
   availability: 'Open to ML / DS roles',
-  focus: 'ML systems & music intelligence',
-  /** Placeholder — update with real graduation year/details later */
-  education: 'B.S. Computer Science (Data Science), University of Illinois Urbana-Champaign — 2024',
+  focus: 'ML systems & data science',
+  education: 'B.S. Data Science, UC Irvine — 2025',
   currentBuild: 'Currently building Spotify Atlas',
   social: {
     github: 'https://github.com/aditmohindra',
-    linkedin: 'https://linkedin.com/in/aditmohindra',
+    linkedin: 'https://www.linkedin.com/in/adit-mohindra',
     email: 'hello@example.com',
   },
   resumeHref: '/resume',

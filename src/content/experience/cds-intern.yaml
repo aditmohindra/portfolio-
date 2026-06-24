@@ -1,0 +1,14 @@
+role: Data Science Intern
+company: Connected Dealer Services
+location: Irvine, CA
+start: Jul 2024
+end: Aug 2025
+homepage: true
+bullets:
+  - Trained and deployed a predictive customer churn model using historical sales and service order data to identify high-risk customers based on purchase patterns and engagement history.
+  - Built real-time Tableau and Streamlit dashboards for stakeholders to explore churn risk across products and regions, enabling proactive retention strategies.
+  - Engineered a cross-platform customer identity system using SQL-based fuzzy matching and Python ETL, resolving 100K+ fragmented records across Salesforce, M2M, Elastic, and NetSuite.
+  - Improved enterprise data quality via cleaning pipelines and cross-platform validation reports, reducing reporting inconsistencies and data errors by 40%.
+  - Delivered customer analytics via cohort analysis, RFM scoring, and survival analysis to evaluate lifetime value and segmentation across thousands of accounts.
+  - Prototyped time series forecasting models using ARIMA, SARIMA, and Merlion to support EOQ inventory planning and identify revenue opportunities.
+stack: [Python, SQL, Tableau, Streamlit, Salesforce, ARIMA]

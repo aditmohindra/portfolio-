@@ -1,9 +1,0 @@
-company: Maven
-role: ML Engineering Fellow
-location: Remote
-start: Jan 2024
-end: Apr 2024
-bullets:
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  - Sed do eiusmod tempor incididunt ut labore et dolore magna.
-stack: [Python, FastAPI, Docker, PyTorch]

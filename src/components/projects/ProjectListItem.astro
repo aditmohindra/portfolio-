@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import Tag from '../ui/Tag.astro';
 import TagList from '../ui/TagList.astro';
 import ExternalLink from '../ui/ExternalLink.astro';
 
@@ -22,6 +23,10 @@ const thumbnailPatterns: Record<typeof cardVariant, string> = {
 
 const externalHref = links.demo || links.github || '';
 const caseStudyHref = `/projects/${slug}`;
+
+const maxVisibleTags = 6;
+const visibleStack = stack.slice(0, maxVisibleTags);
+const hiddenTagCount = stack.length - visibleStack.length;
 ---
 
 <article class:list={['flex gap-grid', className]}>
@@ -79,7 +84,10 @@ const caseStudyHref = `/projects/${slug}`;
         }
       </div>
       <p class="text-small text-ink-muted">{summary}</p>
-      <TagList tags={stack} />
+      <div class="flex flex-wrap items-center gap-2">
+        <TagList tags={visibleStack} />
+        {hiddenTagCount > 0 && <Tag>+{hiddenTagCount} more</Tag>}
+      </div>
     </div>
     <a
       href={caseStudyHref}
