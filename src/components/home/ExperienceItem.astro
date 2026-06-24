@@ -1,15 +1,15 @@
 ---
 interface Props {
-  title: string;
+  role: string;
   company: string;
   location: string;
   start: string;
   end: string;
-  highlights: string[];
+  bullets: string[];
   class?: string;
 }
 
-const { title, company, location, start, end, highlights, class: className } = Astro.props;
+const { role, company, location, start, end, bullets, class: className } = Astro.props;
 
 function formatMonth(value: string): string {
   if (value === 'Present') return 'Present';
@@ -23,16 +23,16 @@ const dateRange = `${formatMonth(start)} – ${formatMonth(end)}`;
 ---
 
 <article class:list={['border-l border-border-muted pl-4', className]}>
-  <h3 class="text-h3 text-ink">{title}</h3>
+  <h3 class="text-h3 text-ink">{role}</h3>
   <p class="mt-1 text-small text-ink">
     {company}
     <span class="text-ink-muted"> · {location}</span>
   </p>
   <p class="tabular-nums mt-1 text-micro text-ink-muted">{dateRange}</p>
   {
-    highlights.length > 0 && (
+    bullets.length > 0 && (
       <ul class="mt-2 flex flex-col gap-1">
-        {highlights.map((bullet) => (
+        {bullets.map((bullet) => (
           <li class="flex gap-2 text-small text-ink-muted">
             <span aria-hidden="true" class="text-accent">
               ·

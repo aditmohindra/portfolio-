@@ -1,0 +1,9 @@
+company: InsightLoop
+role: Data Analyst
+location: Remote
+start: Jun 2023
+end: Dec 2023
+bullets:
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  - Sed do eiusmod tempor incididunt ut labore et dolore magna.
+stack: [SQL, Tableau, Python]

@@ -1,0 +1,142 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from '../ui/TagList.astro';
+import ExternalLink from '../ui/ExternalLink.astro';
+
+type Project = CollectionEntry<'projects'>;
+
+interface Props {
+  project: Project;
+  class?: string;
+}
+
+const { project, class: className } = Astro.props;
+const { title, slug, summary, stack, cardVariant, links } = project.data;
+
+const thumbnailPatterns: Record<typeof cardVariant, string> = {
+  'dark-globe': 'project-thumb-dark',
+  'blue-cube': 'project-thumb-blue',
+  'light-browser': 'project-thumb-browser',
+  'light-wave': 'project-thumb-wave',
+};
+
+const externalHref = links.demo || links.github || '';
+const caseStudyHref = `/projects/${slug}`;
+---
+
+<article class:list={['flex gap-grid', className]}>
+  <div
+    class:list={[
+      'relative aspect-[16/10] w-28 shrink-0 border border-border-ink sm:w-36',
+      thumbnailPatterns[cardVariant],
+    ]}
+    aria-hidden="true"
+  >
+    {
+      cardVariant === 'dark-globe' && (
+        <svg
+          class="absolute inset-0 size-full text-accent/30"
+          viewBox="0 0 160 100"
+          preserveAspectRatio="xMidYMid slice"
+          aria-hidden="true"
+        >
+          <circle cx="80" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="1" />
+          <ellipse
+            cx="80"
+            cy="50"
+            rx="28"
+            ry="10"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          />
+          <path d="M52 50h56M80 22v56" stroke="currentColor" stroke-width="0.5" opacity="0.5" />
+        </svg>
+      )
+    }
+  </div>
+
+  <div class="flex min-w-0 flex-1 gap-2">
+    <div class="flex min-w-0 flex-1 flex-col gap-2">
+      <div class="flex items-start gap-2">
+        <h3 class="text-h3 text-ink">
+          <a
+            href={caseStudyHref}
+            class="interactive-surface hover:text-accent-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+          >
+            {title}
+          </a>
+        </h3>
+        {
+          externalHref && (
+            <ExternalLink
+              href={externalHref}
+              label={`External link for ${title}`}
+              class="shrink-0 text-ink"
+              iconOnly
+            />
+          )
+        }
+      </div>
+      <p class="text-small text-ink-muted">{summary}</p>
+      <TagList tags={stack} />
+    </div>
+    <a
+      href={caseStudyHref}
+      class="interactive-surface inline-flex min-h-11 min-w-11 shrink-0 items-start justify-center pt-0.5 text-label text-accent-deep hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+      aria-label={`View ${title} case study`}
+    >
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .project-thumb-dark {
+    background-color: var(--color-surface-dark);
+    background-image:
+      linear-gradient(var(--color-accent-deep) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-accent-deep) 1px, transparent 1px);
+    background-size: 12px 12px;
+    background-position: center;
+  }
+
+  .project-thumb-blue {
+    background-color: var(--color-accent-wash);
+    background-image:
+      linear-gradient(
+        135deg,
+        transparent 48%,
+        var(--color-accent) 48%,
+        var(--color-accent) 52%,
+        transparent 52%
+      ),
+      linear-gradient(
+        45deg,
+        transparent 48%,
+        var(--color-accent-deep) 48%,
+        var(--color-accent-deep) 52%,
+        transparent 52%
+      );
+    background-size: 16px 16px;
+  }
+
+  .project-thumb-browser {
+    background-color: var(--color-surface);
+    background-image:
+      linear-gradient(var(--color-border-muted) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border-muted) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  .project-thumb-wave {
+    background-color: var(--color-canvas);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-accent-glow),
+      var(--color-accent-glow) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  }
+</style>

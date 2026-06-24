@@ -3,7 +3,7 @@ type AwardIcon = 'trophy' | 'medal' | 'star' | 'certificate';
 
 interface Props {
   title: string;
-  issuer: string;
+  organization: string;
   date: string;
   description?: string;
   icon?: AwardIcon;
@@ -11,7 +11,15 @@ interface Props {
   class?: string;
 }
 
-const { title, issuer, date, description, icon = 'star', link, class: className } = Astro.props;
+const {
+  title,
+  organization,
+  date,
+  description,
+  icon = 'star',
+  link,
+  class: className,
+} = Astro.props;
 
 const iconPaths: Record<AwardIcon, string> = {
   trophy:
@@ -51,7 +59,7 @@ const iconPaths: Record<AwardIcon, string> = {
       )
     }
     <p class="mt-0.5 text-small text-ink-muted">
-      {issuer}
+      {organization}
       <span class="tabular-nums"> · {date}</span>
     </p>
     {description && <p class="mt-1 text-small text-ink-muted">{description}</p>}

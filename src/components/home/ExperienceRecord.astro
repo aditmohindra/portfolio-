@@ -1,0 +1,35 @@
+---
+import RecordSection from '../ui/RecordSection.astro';
+import Divider from '../ui/Divider.astro';
+import ExperienceItem from './ExperienceItem.astro';
+import { getCollection } from 'astro:content';
+
+function parseStartDate(value: string): number {
+  const parsed = Date.parse(value);
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
+const experienceEntries = (await getCollection('experience')).sort(
+  (a, b) => parseStartDate(b.data.start) - parseStartDate(a.data.start),
+);
+---
+
+<RecordSection number="03" label="EXPERIENCE" href="/experience" linkLabel="View all">
+  <>
+    {
+      experienceEntries.map((entry, index) => (
+        <>
+          <ExperienceItem
+            role={entry.data.role}
+            company={entry.data.company}
+            location={entry.data.location}
+            start={entry.data.start}
+            end={entry.data.end}
+            bullets={entry.data.bullets}
+          />
+          {index < experienceEntries.length - 1 && <Divider class="my-block" />}
+        </>
+      ))
+    }
+  </>
+</RecordSection>

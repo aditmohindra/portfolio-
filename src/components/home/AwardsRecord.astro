@@ -1,0 +1,28 @@
+---
+import RecordSection from '../ui/RecordSection.astro';
+import Divider from '../ui/Divider.astro';
+import AwardItem from './AwardItem.astro';
+import { getCollection } from 'astro:content';
+
+const awards = (await getCollection('awards')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<RecordSection number="05" label="AWARDS & RECOGNITION">
+  <>
+    {
+      awards.map((entry, index) => (
+        <>
+          <AwardItem
+            title={entry.data.title}
+            organization={entry.data.organization}
+            date={entry.data.date}
+            description={entry.data.description}
+            icon={entry.data.icon}
+            link={entry.data.link}
+          />
+          {index < awards.length - 1 && <Divider class="my-block" />}
+        </>
+      ))
+    }
+  </>
+</RecordSection>

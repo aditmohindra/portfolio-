@@ -1,0 +1,23 @@
+---
+import RecordSection from '../ui/RecordSection.astro';
+import Divider from '../ui/Divider.astro';
+import ProjectListItem from '../projects/ProjectListItem.astro';
+import { getCollection } from 'astro:content';
+
+const homepageProjects = (await getCollection('projects'))
+  .filter((project) => project.data.homepage)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<RecordSection number="02" label="PROJECTS" href="/projects" linkLabel="View all projects">
+  <div>
+    {
+      homepageProjects.map((project, index) => (
+        <>
+          <ProjectListItem project={project} />
+          {index < homepageProjects.length - 1 && <Divider class="my-block" />}
+        </>
+      ))
+    }
+  </div>
+</RecordSection>

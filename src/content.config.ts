@@ -12,6 +12,7 @@ const projects = defineCollection({
     title: z.string(),
     slug: z.string(),
     featured: z.boolean().default(false),
+    homepage: z.boolean().default(false),
     order: z.number(),
     role: z.string(),
     timeline: z.string(),
@@ -34,15 +35,13 @@ const projects = defineCollection({
 const experience = defineCollection({
   loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/experience' }),
   schema: z.object({
-    title: z.string(),
+    role: z.string(),
     company: z.string(),
     location: z.string(),
     start: z.string(),
     end: z.string(),
-    description: z.string(),
-    highlights: z.array(z.string()).default([]),
-    tags: z.array(z.string()).default([]),
-    order: z.number(),
+    bullets: z.array(z.string()).default([]),
+    stack: z.array(z.string()).default([]),
   }),
 });
 
@@ -50,7 +49,7 @@ const awards = defineCollection({
   loader: glob({ pattern: '**/*.{yaml,yml}', base: './src/content/awards' }),
   schema: z.object({
     title: z.string(),
-    issuer: z.string(),
+    organization: z.string(),
     date: z.string(),
     description: z.string().optional(),
     icon: awardIcon.default('star'),

@@ -1,0 +1,26 @@
+---
+import RecordSection from '../ui/RecordSection.astro';
+import Divider from '../ui/Divider.astro';
+import Tag from '../ui/Tag.astro';
+import { skills } from '../../data/skills';
+---
+
+<RecordSection number="04" label="SKILLS">
+  <div>
+    {
+      skills.map((group, index) => (
+        <>
+          <div class="flex w-full flex-col gap-2">
+            <p class="font-mono text-micro uppercase tracking-wide text-ink">{group.category}</p>
+            <div class="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <Tag>{item}</Tag>
+              ))}
+            </div>
+          </div>
+          {index < skills.length - 1 && <Divider class="my-block" />}
+        </>
+      ))
+    }
+  </div>
+</RecordSection>

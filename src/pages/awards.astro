@@ -17,7 +17,7 @@ const awards = (await getCollection('awards')).sort((a, b) => a.data.order - b.d
           awards.map((entry) => (
             <AwardItem
               title={entry.data.title}
-              issuer={entry.data.issuer}
+              organization={entry.data.organization}
               date={entry.data.date}
               description={entry.data.description}
               icon={entry.data.icon}

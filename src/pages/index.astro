@@ -2,6 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PortfolioShell from '../components/layout/PortfolioShell.astro';
 import HeroRecord from '../components/home/HeroRecord.astro';
+import ProjectsRecord from '../components/home/ProjectsRecord.astro';
+import ExperienceRecord from '../components/home/ExperienceRecord.astro';
+import SkillsRecord from '../components/home/SkillsRecord.astro';
+import AwardsRecord from '../components/home/AwardsRecord.astro';
 import { siteConfig } from '../data/site';
 ---
 
@@ -12,5 +16,9 @@ import { siteConfig } from '../data/site';
 >
   <PortfolioShell>
     <HeroRecord />
+    <ProjectsRecord />
+    <ExperienceRecord />
+    <SkillsRecord />
+    <AwardsRecord />
   </PortfolioShell>
 </BaseLayout>

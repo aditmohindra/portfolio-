@@ -20,8 +20,8 @@ export const siteConfig = {
   location: 'Bay Area',
   availability: 'Open to ML / DS roles',
   focus: 'ML systems & music intelligence',
-  /** Placeholder until education details are confirmed in CONTENT_INVENTORY.md */
-  education: 'TBD — degree & institution pending',
+  /** Placeholder — update with real graduation year/details later */
+  education: 'B.S. Computer Science (Data Science), University of Illinois Urbana-Champaign — 2024',
   currentBuild: 'Currently building Spotify Atlas',
   social: {
     github: 'https://github.com/aditmohindra',
