@@ -1,0 +1,247 @@
+---
+import { siteConfig } from '../../data/site';
+---
+
+<div class="home-hero">
+  <p class="home-hero__role">
+    <span class="home-hero__role-dot" aria-hidden="true"></span>
+    {siteConfig.roleLine}
+  </p>
+
+  <h1 class="home-hero__name name-lockup text-ink">
+    <span class="home-hero__accent name-lockup-accent font-accent text-ink">Adit</span>
+    <span class="home-hero__display name-lockup-display font-display">Mohindra</span>
+  </h1>
+
+  <p class="home-hero__bio">{siteConfig.heroPositioning}</p>
+
+  <div class="home-hero__actions">
+    <a href="/projects" class="home-hero__btn home-hero__btn--primary interactive-surface">
+      VIEW PROJECTS
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15"></path></svg>
+    </a>
+    <a href="/experience" class="home-hero__btn home-hero__btn--secondary interactive-surface">
+      EXPERIENCE
+    </a>
+  </div>
+
+  <div class="home-hero__pills">
+    <span class="home-hero__pill">
+      <svg viewBox="0 0 24 24" class="home-hero__pill-icon" aria-hidden="true">
+        <path d="M12 21s-6-5.686-6-10a6 6 0 1 1 12 0c0 4.314-6 10-6 10Z"></path>
+        <circle cx="12" cy="11" r="2"></circle>
+      </svg>
+      Bay Area, CA
+    </span>
+    <span class="home-hero__pill">
+      <span class="home-hero__pill-status" aria-hidden="true"></span>
+      {siteConfig.currentBuild}
+    </span>
+  </div>
+</div>
+
+<style>
+  .home-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.75rem, 1.6vh, 1.15rem);
+    min-width: 0;
+    height: 100%;
+  }
+
+  .home-hero__role {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+    font-size: clamp(1rem, 0.75rem + 0.9vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .home-hero__role-dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .home-hero__name {
+    margin: 0;
+  }
+
+  .home-hero__accent {
+    font-size: clamp(3rem, 1.8rem + 3.6vw + 3.8vh, 7.25rem);
+    line-height: 1;
+    margin-bottom: -0.12em;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    text-rendering: optimizeSpeed;
+  }
+
+  .home-hero__display {
+    font-size: clamp(2.75rem, 1.6rem + 3.2vw + 3.4vh, 6.5rem);
+    line-height: 0.95;
+    font-weight: var(--text-display--font-weight);
+  }
+
+  .home-hero__bio {
+    margin: 0;
+    max-width: 34rem;
+    font-size: clamp(1rem, 0.85rem + 0.35vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .home-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+  }
+
+  .home-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0.8rem 1.85rem;
+    border: 1px solid var(--color-border-ink);
+    font-size: clamp(0.875rem, 0.75rem + 0.3vw, 1rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .home-hero__btn svg {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: square;
+  }
+
+  .home-hero__btn--primary {
+    background: var(--color-ink);
+    color: var(--color-ink-on-dark);
+  }
+
+  .home-hero__btn--primary:hover {
+    background: var(--color-accent-deep);
+    border-color: var(--color-accent-deep);
+  }
+
+  .home-hero__btn--secondary {
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+
+  .home-hero__btn--secondary:hover {
+    border-color: var(--color-accent-deep);
+    color: var(--color-accent-deep);
+  }
+
+  .home-hero__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .home-hero__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.15rem;
+    border: 1px solid var(--color-border-muted);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    font-size: clamp(0.8125rem, 0.72rem + 0.25vw, 0.9375rem);
+    letter-spacing: 0.02em;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .home-hero__pill-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: var(--color-ink-muted);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .home-hero__pill-status {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 9999px;
+    background: var(--color-status-active);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero__btn {
+      transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+    }
+  }
+
+  /* Shorter desktops: tighten rhythm to keep the hero within its ~60% allocation */
+  @media (max-height: 900px) {
+    .home-hero {
+      gap: clamp(0.6rem, 1.3vh, 0.95rem);
+    }
+
+    .home-hero__accent {
+      font-size: clamp(2.75rem, 1.6rem + 3.2vw + 3.2vh, 6.25rem);
+    }
+
+    .home-hero__display {
+      font-size: clamp(2.5rem, 1.45rem + 2.85vw + 2.85vh, 5.6rem);
+    }
+  }
+
+  @media (max-height: 820px) {
+    .home-hero {
+      gap: clamp(0.45rem, 1vh, 0.75rem);
+    }
+
+    .home-hero__role {
+      font-size: clamp(0.9rem, 0.75rem + 0.6vw, 1.05rem);
+    }
+
+    .home-hero__accent {
+      font-size: clamp(2.4rem, 1.4rem + 2.6vw + 2.6vh, 5.25rem);
+    }
+
+    .home-hero__display {
+      font-size: clamp(2.2rem, 1.3rem + 2.3vw + 2.3vh, 4.75rem);
+    }
+
+    .home-hero__bio {
+      font-size: clamp(0.9rem, 0.8rem + 0.25vw, 1rem);
+      line-height: 1.45;
+    }
+
+    .home-hero__btn {
+      min-height: 2.75rem;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.8125rem;
+    }
+
+    .home-hero__pill {
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
+    }
+  }
+</style>

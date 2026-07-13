@@ -24,16 +24,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: 'Data',
-    items: [
-      'PostgreSQL',
-      'Qdrant',
-      'Snowflake',
-      'BigQuery',
-      'Pandas',
-      'NumPy',
-      'Airflow',
-      'Spark',
-    ],
+    items: ['PostgreSQL', 'Qdrant', 'Snowflake', 'BigQuery', 'Pandas', 'NumPy', 'Airflow', 'Spark'],
   },
   {
     category: 'Tools / Platforms',

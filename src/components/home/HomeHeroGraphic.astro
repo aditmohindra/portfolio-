@@ -1,0 +1,391 @@
+---
+import AsciiArtStatic from '../decor/AsciiArtStatic.astro';
+import DecorativeGlobe from '../decor/DecorativeGlobe.astro';
+import DecorativeChecker from '../decor/DecorativeChecker.astro';
+import DecorativeStar from '../decor/DecorativeStar.astro';
+
+const systemLabels = ['DATA', 'MODELS', 'REAL WORLD IMPACT'];
+// Decorative progress footer — true = filled, false = outline
+const progressCells = [true, true, true, true, true, false, false, false];
+---
+
+<div class="hero-graphic" aria-hidden="true">
+  <!-- Base layer: decorative dotted-lasso ASCII loop -->
+  <div class="hero-graphic__ascii">
+    <AsciiArtStatic />
+  </div>
+
+  <!-- Connectors -->
+  <svg
+    class="hero-graphic__wires"
+    viewBox="0 0 120 100"
+    preserveAspectRatio="none"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="0.4"
+    stroke-dasharray="1.4 1.4"
+  >
+    <!-- globe -> window top-left -->
+    <polyline points="12,11 25.5,11 25.5,20.5"></polyline>
+    <!-- window -> system info overlap -->
+    <polyline points="93.5,62 93.5,70 100,70"></polyline>
+  </svg>
+
+  <!-- Globe (top-left of cluster) -->
+  <div class="hero-graphic__globe">
+    <DecorativeGlobe size={64} />
+  </div>
+
+  <!-- ATLAS.EXE window -->
+  <div class="atlas">
+    <div class="atlas__bar">
+      <span class="atlas__badge"></span>
+      <span class="atlas__name">ADIT.EXE</span>
+      <span class="atlas__controls">
+        <svg viewBox="0 0 12 12" class="atlas__ctrl"
+          ><line x1="2.5" y1="8" x2="9.5" y2="8"></line></svg
+        >
+        <svg viewBox="0 0 12 12" class="atlas__ctrl">
+          <rect x="3" y="3.4" width="6" height="5.6"></rect>
+          <path d="M4.6 3.4 V2.2 H10 V7.4 H8.6"></path>
+        </svg>
+        <svg viewBox="0 0 12 12" class="atlas__ctrl"
+          ><rect x="2.6" y="2.6" width="6.8" height="6.8"></rect></svg
+        >
+        <svg viewBox="0 0 12 12" class="atlas__ctrl"
+          ><path d="M2.8 2.8 L9.2 9.2 M9.2 2.8 L2.8 9.2"></path></svg
+        >
+      </span>
+    </div>
+
+    <div class="atlas__screen">
+      <img
+        src="/art/AditWindowHeroIcon.png"
+        alt=""
+        width="1232"
+        height="952"
+        loading="eager"
+        decoding="async"
+      />
+
+      <!-- Right-edge scrollbar-style toolbar -->
+      <div class="atlas__rail">
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><path d="M4 8 L7 4 L10 8"></path><line x1="7" y1="4" x2="7" y2="11"></line></svg
+        >
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><path d="M4 6 L7 10 L10 6"></path><line x1="7" y1="3" x2="7" y2="10"></line></svg
+        >
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><rect x="4" y="4" width="6" height="6" transform="rotate(45 7 7)"></rect></svg
+        >
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><rect x="4" y="4" width="6" height="6" transform="rotate(45 7 7)"></rect></svg
+        >
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><rect x="3.5" y="3.5" width="7" height="7"></rect><line x1="7" y1="3.5" x2="7" y2="10.5"
+          ></line><line x1="3.5" y1="7" x2="10.5" y2="7"></line></svg
+        >
+        <svg viewBox="0 0 14 14" class="atlas__rail-icon"
+          ><path d="M7 3 L11 5 L7 7 L3 5 Z"></path><path d="M3 8 L7 10 L11 8"></path></svg
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM INFO window -->
+  <div class="sysinfo">
+    <div class="sysinfo__bar">
+      <span class="sysinfo__name">SYSTEM INFO</span>
+      <svg viewBox="0 0 12 12" class="sysinfo__close"
+        ><path d="M2.8 2.8 L9.2 9.2 M9.2 2.8 L2.8 9.2"></path></svg
+      >
+    </div>
+    <div class="sysinfo__body">
+      <ul class="sysinfo__list">
+        {systemLabels.map((label) => <li class="sysinfo__item">{label}</li>)}
+      </ul>
+      <div class="sysinfo__progress">
+        {
+          progressCells.map((filled) => (
+            <span class:list={['sysinfo__cell', filled && 'sysinfo__cell--filled']} />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkered accent square (bottom-left of ATLAS window) -->
+  <div class="hero-graphic__checker">
+    <DecorativeChecker size={32} />
+  </div>
+
+  <!-- Sparkle accents -->
+  <div class="hero-graphic__star hero-graphic__star--tr">
+    <DecorativeStar size={22} />
+  </div>
+  <div class="hero-graphic__star hero-graphic__star--left">
+    <DecorativeStar size={16} />
+  </div>
+</div>
+
+<style>
+  .hero-graphic {
+    position: relative;
+    height: min(var(--hero-graphic-max-h, 28rem), 100%);
+    width: auto;
+    max-width: 100%;
+    aspect-ratio: 1.2 / 1;
+    margin-inline: auto;
+    color: var(--color-accent-deep);
+  }
+
+  /* Base ASCII lasso loop */
+  .hero-graphic__ascii {
+    position: absolute;
+    top: 2%;
+    right: -4%;
+    z-index: 0;
+    font-size: 0.5rem;
+    line-height: 1;
+    color: var(--color-accent-deep);
+    opacity: 0.38;
+  }
+
+  .hero-graphic__ascii :global(pre) {
+    font-size: inherit;
+    line-height: 1;
+  }
+
+  .hero-graphic__wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    color: var(--color-ink-muted);
+    overflow: visible;
+  }
+
+  .hero-graphic__globe {
+    position: absolute;
+    top: 1%;
+    left: 3%;
+    z-index: 2;
+    opacity: 0.75;
+  }
+
+  /* ---- ATLAS.EXE window ---- */
+  .atlas {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 64%;
+    z-index: 3;
+    border: 1px solid var(--color-border-ink);
+    border-radius: 6px;
+    background: var(--color-surface);
+    box-shadow: 0 6px 20px rgba(10, 10, 10, 0.12);
+    overflow: hidden;
+  }
+
+  .atlas__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.38rem 0.5rem;
+    border-bottom: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .atlas__badge {
+    width: 0.85rem;
+    height: 0.85rem;
+    flex-shrink: 0;
+    background: var(--color-accent);
+    border: 1px solid var(--color-accent-deep);
+  }
+
+  .atlas__name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+  }
+
+  .atlas__controls {
+    display: inline-flex;
+    gap: 0.34rem;
+    margin-left: auto;
+  }
+
+  .atlas__ctrl {
+    width: 0.9rem;
+    height: 0.9rem;
+    stroke: var(--color-ink);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+  }
+
+  .atlas__screen {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1232 / 952;
+  }
+
+  .atlas__screen img {
+    position: absolute;
+    max-width: none;
+    /* Crop the baked-in chrome so only the isometric city shows */
+    width: 117.5%;
+    height: 114%;
+    left: -2.6%;
+    top: -11%;
+  }
+
+  .atlas__rail {
+    position: absolute;
+    top: 6%;
+    right: 3%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.16rem;
+    padding: 0.2rem;
+    border: 1px solid var(--color-border-ink);
+    border-radius: 3px;
+    background: var(--color-surface);
+    z-index: 2;
+  }
+
+  .atlas__rail-icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke: var(--color-ink);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  /* ---- SYSTEM INFO window ---- */
+  .sysinfo {
+    position: absolute;
+    right: 0;
+    bottom: 3%;
+    width: 35%;
+    z-index: 4;
+    border: 1px solid var(--color-border-ink);
+    border-radius: 6px;
+    background: var(--color-surface);
+    box-shadow: 0 6px 18px rgba(10, 10, 10, 0.12);
+    overflow: hidden;
+  }
+
+  .sysinfo__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.34rem 0.5rem;
+    border-bottom: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .sysinfo__name {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+  }
+
+  .sysinfo__close {
+    width: 0.82rem;
+    height: 0.82rem;
+    stroke: var(--color-ink);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+  }
+
+  .sysinfo__body {
+    padding: 0.6rem 0.65rem 0.65rem;
+  }
+
+  .sysinfo__list {
+    margin: 0 0 0.65rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .sysinfo__item {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-muted);
+  }
+
+  .sysinfo__progress {
+    display: flex;
+    gap: 0.16rem;
+  }
+
+  .sysinfo__cell {
+    width: 0.52rem;
+    height: 0.52rem;
+    border: 1px solid var(--color-accent-deep);
+    background: transparent;
+  }
+
+  .sysinfo__cell--filled {
+    background: var(--color-accent);
+  }
+
+  /* ---- Accents ---- */
+  .hero-graphic__checker {
+    position: absolute;
+    left: 6%;
+    bottom: 14%;
+    z-index: 5;
+    line-height: 0;
+  }
+
+  .hero-graphic__checker :global(svg) {
+    color: var(--color-ink);
+    opacity: 0.9;
+  }
+
+  .hero-graphic__globe {
+    line-height: 0;
+  }
+
+  .hero-graphic__star {
+    line-height: 0;
+  }
+
+  .hero-graphic__star {
+    position: absolute;
+    z-index: 5;
+  }
+
+  .hero-graphic__star--tr {
+    top: 8%;
+    right: 6%;
+  }
+
+  .hero-graphic__star--left {
+    top: 46%;
+    left: 0;
+  }
+
+  @media (min-width: 640px) {
+    .hero-graphic__ascii {
+      font-size: 0.42rem;
+    }
+  }
+</style>

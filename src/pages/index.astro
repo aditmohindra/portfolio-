@@ -1,11 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PortfolioShell from '../components/layout/PortfolioShell.astro';
-import HeroRecord from '../components/home/HeroRecord.astro';
-import ProjectsRecord from '../components/home/ProjectsRecord.astro';
-import ExperienceRecord from '../components/home/ExperienceRecord.astro';
-import SkillsRecord from '../components/home/SkillsRecord.astro';
-import AwardsRecord from '../components/home/AwardsRecord.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import HomeHeroGraphic from '../components/home/HomeHeroGraphic.astro';
+import HomeFeaturedProjects from '../components/home/HomeFeaturedProjects.astro';
 import { siteConfig } from '../data/site';
 ---
 
@@ -14,11 +11,96 @@ import { siteConfig } from '../data/site';
   description={`${siteConfig.roleLine} — ${siteConfig.tagline}`}
   layout="portfolio"
 >
-  <PortfolioShell>
-    <HeroRecord />
-    <ProjectsRecord />
-    <ExperienceRecord />
-    <SkillsRecord />
-    <AwardsRecord />
-  </PortfolioShell>
+  <div class="home">
+    <section class="home__hero" aria-label="Introduction">
+      <div class="home__hero-left">
+        <HomeHero />
+      </div>
+      <div class="home__hero-right">
+        <HomeHeroGraphic />
+      </div>
+    </section>
+
+    <hr class="home__divider" />
+
+    <div class="home__featured">
+      <HomeFeaturedProjects />
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .home {
+    --hero-graphic-max-h: 28rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.8vh, 1.25rem);
+    width: 100%;
+    max-width: min(95vw, 100rem);
+    margin-inline: auto;
+    padding-block: clamp(0.75rem, 2vh, 1.5rem) clamp(0.75rem, 2vh, 1.25rem);
+    padding-inline: 0.25rem;
+    height: calc(100dvh - 3.1rem);
+    overflow: hidden;
+  }
+
+  /* Shorter desktops: compress the graphic + rhythm to preserve single-viewport */
+  @media (max-height: 900px) {
+    .home {
+      --hero-graphic-max-h: 25rem;
+      gap: clamp(0.6rem, 1.4vh, 1rem);
+    }
+  }
+
+  @media (max-height: 820px) {
+    .home {
+      --hero-graphic-max-h: 22rem;
+    }
+  }
+
+  .home__hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    align-content: stretch;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    flex: 65 1 0%;
+    min-height: 0;
+  }
+
+  .home__hero-left {
+    min-width: 0;
+  }
+
+  .home__hero-right {
+    display: none;
+  }
+
+  .home__divider {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-muted);
+    flex: 0 0 auto;
+  }
+
+  .home__featured {
+    flex: 35 1 0%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .home__hero {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    }
+
+    .home__hero-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0;
+    }
+  }
+</style>

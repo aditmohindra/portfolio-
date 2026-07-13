@@ -27,5 +27,5 @@ export const siteConfig = {
     linkedin: 'https://www.linkedin.com/in/adit-mohindra',
     email: 'hello@example.com',
   },
-  resumeHref: '/resume',
+  resumeHref: '/resume/Adit-Mohindra-Resume.pdf',
 } as const;

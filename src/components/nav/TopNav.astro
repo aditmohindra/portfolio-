@@ -8,13 +8,19 @@ function isActive(href: string): boolean {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-const navItems = [
+interface NavItem {
+  label: string;
+  href: string;
+  /** Direct file download instead of a page navigation. */
+  download?: boolean;
+}
+
+const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Projects', href: '/projects' },
   { label: 'Experience', href: '/experience' },
-  { label: 'Awards', href: '/awards' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Resume', href: siteConfig.resumeHref },
+  { label: 'Resume', href: siteConfig.resumeHref, download: true },
   { label: 'Creative', href: '/creative' },
 ];
 ---
@@ -37,24 +43,28 @@ const navItems = [
       class="top-nav__links font-nav flex flex-wrap items-center justify-end gap-x-8 text-label font-normal uppercase"
     >
       {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              'interactive-surface relative inline-flex items-center pb-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
-              isActive(item.href) ? 'text-accent' : 'text-ink-muted hover:text-ink',
-            ]}
-            aria-current={isActive(item.href) ? 'page' : undefined}
-          >
-            {item.label}
-            {isActive(item.href) ? (
-              <span
-                class="absolute bottom-0 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-accent"
-                aria-hidden="true"
-              />
-            ) : null}
-          </a>
-        ))
+        navItems.map((item) => {
+          const active = !item.download && isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              download={item.download ? '' : undefined}
+              class:list={[
+                'interactive-surface relative inline-flex items-center pb-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+                active ? 'text-accent' : 'text-ink-muted hover:text-ink',
+              ]}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+              {active ? (
+                <span
+                  class="absolute bottom-0 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-accent"
+                  aria-hidden="true"
+                />
+              ) : null}
+            </a>
+          );
+        })
       }
     </div>
   </div>
