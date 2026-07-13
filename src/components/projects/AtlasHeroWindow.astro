@@ -1,0 +1,466 @@
+---
+import DecorativeChecker from '../decor/DecorativeChecker.astro';
+import DecorativeStar from '../decor/DecorativeStar.astro';
+
+/* TODO: replace with real dataset stats once available */
+const systemInfo = [
+  { label: 'USERS', value: '12,842' },
+  { label: 'TRACKS', value: '1.2M' },
+  { label: 'EMBEDDINGS', value: '1.2M' },
+  { label: 'CLUSTERS', value: '842' },
+  { label: 'CITIES', value: '312' },
+];
+
+const progressCells = [true, true, true, true, true, true, true, false];
+
+const legendItems = [
+  { label: 'High Density', dot: 'dot--xl dot--filled' },
+  { label: 'Medium', dot: 'dot--md dot--filled' },
+  { label: 'Low', dot: 'dot--sm dot--filled' },
+  { label: 'City', dot: 'dot--md dot--outline' },
+  { label: 'Cluster', dot: 'dot--lg dot--outline' },
+];
+---
+
+<div
+  class="atlas-hero"
+  role="img"
+  aria-label="Atlas.exe window showing a geospatial map of music genre density across the world"
+>
+  <div class="atlas-hero__decor atlas-hero__decor--checker">
+    <DecorativeChecker size={30} />
+  </div>
+  <div class="atlas-hero__decor atlas-hero__decor--star-tr">
+    <DecorativeStar size={20} />
+  </div>
+  <div class="atlas-hero__decor atlas-hero__decor--star-bl">
+    <DecorativeStar size={14} />
+  </div>
+
+  <div class="atlas-hero__window">
+    <div class="atlas-hero__bar">
+      <svg
+        class="atlas-hero__bar-globe"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="9"></circle>
+        <ellipse cx="12" cy="12" rx="9" ry="3.5"></ellipse>
+        <path d="M3 12h18M12 3v18" opacity="0.45"></path>
+      </svg>
+      <span class="atlas-hero__bar-title">ATLAS.EXE</span>
+      <span class="atlas-hero__bar-controls" aria-hidden="true">
+        <svg viewBox="0 0 12 12" class="atlas-hero__ctrl">
+          <line x1="2.5" y1="8" x2="9.5" y2="8"></line>
+        </svg>
+        <svg viewBox="0 0 12 12" class="atlas-hero__ctrl">
+          <rect x="2.6" y="2.6" width="6.8" height="6.8"></rect>
+        </svg>
+        <svg viewBox="0 0 12 12" class="atlas-hero__ctrl">
+          <path d="M2.8 2.8 L9.2 9.2 M9.2 2.8 L2.8 9.2"></path>
+        </svg>
+      </span>
+    </div>
+
+    <div class="atlas-hero__body">
+      <img
+        class="atlas-hero__img"
+        src="/art/atlas-art-hero-project-page.png"
+        alt="Geospatial map showing clusters of music genres such as dream pop, indie rock, k-pop, afrobeats, and lofi hip hop across world regions"
+        width="1672"
+        height="941"
+        loading="eager"
+        decoding="async"
+      />
+
+      <div class="atlas-hero__rail" aria-hidden="true">
+        <span class="atlas-hero__rail-icon">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M7 3 L11 5 L7 7 L3 5 Z"></path>
+            <path d="M3 8 L7 10 L11 8"></path>
+          </svg>
+        </span>
+        <span class="atlas-hero__rail-icon">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
+            <line x1="7" y1="3.5" x2="7" y2="10.5"></line>
+            <line x1="3.5" y1="7" x2="10.5" y2="7"></line>
+          </svg>
+        </span>
+        <span class="atlas-hero__rail-icon">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
+            <circle cx="7" cy="7" r="3.4"></circle>
+            <line x1="7" y1="1.5" x2="7" y2="3.4"></line>
+            <line x1="7" y1="10.6" x2="7" y2="12.5"></line>
+            <line x1="1.5" y1="7" x2="3.4" y2="7"></line>
+            <line x1="10.6" y1="7" x2="12.5" y2="7"></line>
+          </svg>
+        </span>
+        <span class="atlas-hero__rail-icon">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="3.5" y="3.5" width="7" height="7"></rect>
+            <line x1="7" y1="3.5" x2="7" y2="10.5"></line>
+            <line x1="3.5" y1="7" x2="10.5" y2="7"></line>
+          </svg>
+        </span>
+        <span class="atlas-hero__rail-icon">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="4" y="4" width="6" height="6" transform="rotate(45 7 7)"></rect>
+          </svg>
+        </span>
+      </div>
+
+      <div class="atlas-hero__panel atlas-hero__panel--sysinfo">
+        <div class="atlas-hero__panel-bar">
+          <span class="atlas-hero__panel-title">SYSTEM INFO</span>
+          <svg viewBox="0 0 12 12" class="atlas-hero__panel-close" aria-hidden="true">
+            <path d="M2.8 2.8 L9.2 9.2 M9.2 2.8 L2.8 9.2"></path>
+          </svg>
+        </div>
+        <div class="atlas-hero__panel-body">
+          <dl class="atlas-hero__stats">
+            {
+              systemInfo.map((row) => (
+                <>
+                  <dt>{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </>
+              ))
+            }
+          </dl>
+          <div class="atlas-hero__progress" aria-hidden="true">
+            {
+              progressCells.map((filled) => (
+                <span class:list={['atlas-hero__cell', filled && 'atlas-hero__cell--filled']} />
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="atlas-hero__panel atlas-hero__panel--legend">
+        <div class="atlas-hero__panel-bar">
+          <span class="atlas-hero__panel-title">LEGEND</span>
+          <svg viewBox="0 0 12 12" class="atlas-hero__panel-close" aria-hidden="true">
+            <path d="M2.8 2.8 L9.2 9.2 M9.2 2.8 L2.8 9.2"></path>
+          </svg>
+        </div>
+        <ul class="atlas-hero__legend-list">
+          {
+            legendItems.map((item) => (
+              <li class="atlas-hero__legend-item">
+                <span class:list={['atlas-hero__legend-dot', ...item.dot.split(' ')]} />
+                <span>{item.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="atlas-hero__status">
+      <span>READY</span>
+      <span class="atlas-hero__status-coords"
+        >LAT 37.7749&deg; N&nbsp;&nbsp;&nbsp;LON 122.4194&deg; W&nbsp;&nbsp;&nbsp;ZOOM 1.00x</span
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  .atlas-hero {
+    position: relative;
+    width: 100%;
+    max-width: 40rem;
+    margin-inline: auto;
+  }
+
+  .atlas-hero__decor {
+    position: absolute;
+    z-index: 0;
+    line-height: 0;
+  }
+
+  .atlas-hero__decor--checker {
+    left: -0.85rem;
+    bottom: -0.85rem;
+    opacity: 0.9;
+  }
+
+  .atlas-hero__decor--star-tr {
+    right: -0.6rem;
+    top: -0.9rem;
+  }
+
+  .atlas-hero__decor--star-bl {
+    left: 4%;
+    top: 30%;
+  }
+
+  .atlas-hero__window {
+    position: relative;
+    z-index: 1;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+    box-shadow: 0 10px 28px rgba(10, 10, 10, 0.14);
+  }
+
+  .atlas-hero__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.65rem;
+    border-bottom: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .atlas-hero__bar-globe {
+    width: 1.05rem;
+    height: 1.05rem;
+    flex-shrink: 0;
+    color: var(--color-accent-deep);
+  }
+
+  .atlas-hero__bar-title {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-ink);
+  }
+
+  .atlas-hero__bar-controls {
+    display: inline-flex;
+    gap: 0.4rem;
+    margin-left: auto;
+  }
+
+  .atlas-hero__ctrl {
+    width: 0.95rem;
+    height: 0.95rem;
+    stroke: var(--color-ink);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+  }
+
+  .atlas-hero__body {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1672 / 833;
+    background: #0c1220;
+  }
+
+  .atlas-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 61%;
+  }
+
+  .atlas-hero__rail {
+    position: absolute;
+    top: 6%;
+    right: 2.4%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+  }
+
+  .atlas-hero__rail-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+  }
+
+  .atlas-hero__rail-icon svg {
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--color-ink);
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  .atlas-hero__panel {
+    position: absolute;
+    z-index: 3;
+    width: 34%;
+    min-width: 8.5rem;
+    max-width: 11.5rem;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+    box-shadow: 0 6px 16px rgba(10, 10, 10, 0.18);
+  }
+
+  .atlas-hero__panel--sysinfo {
+    left: 3%;
+    top: 6%;
+  }
+
+  .atlas-hero__panel--legend {
+    left: 3%;
+    top: 55%;
+  }
+
+  .atlas-hero__panel-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    padding: 0.3rem 0.45rem;
+    border-bottom: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .atlas-hero__panel-title {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-ink);
+  }
+
+  .atlas-hero__panel-close {
+    width: 0.65rem;
+    height: 0.65rem;
+    stroke: var(--color-ink-muted);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+    flex-shrink: 0;
+  }
+
+  .atlas-hero__panel-body {
+    padding: 0.5rem 0.55rem 0.55rem;
+  }
+
+  .atlas-hero__stats {
+    margin: 0 0 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.18rem 0.4rem;
+  }
+
+  .atlas-hero__stats dt {
+    margin: 0;
+    font-size: 0.5625rem;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .atlas-hero__stats dd {
+    margin: 0;
+    font-size: 0.5625rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .atlas-hero__progress {
+    display: flex;
+    gap: 0.14rem;
+  }
+
+  .atlas-hero__cell {
+    width: 0.42rem;
+    height: 0.42rem;
+    border: 1px solid var(--color-accent-deep);
+    background: transparent;
+  }
+
+  .atlas-hero__cell--filled {
+    background: var(--color-accent-deep);
+  }
+
+  .atlas-hero__legend-list {
+    margin: 0;
+    padding: 0.5rem 0.55rem 0.55rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.32rem;
+  }
+
+  .atlas-hero__legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+  }
+
+  .atlas-hero__legend-dot {
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: transparent;
+  }
+
+  .dot--xl {
+    width: 0.55rem;
+    height: 0.55rem;
+  }
+
+  .dot--lg {
+    width: 0.48rem;
+    height: 0.48rem;
+  }
+
+  .dot--md {
+    width: 0.38rem;
+    height: 0.38rem;
+  }
+
+  .dot--sm {
+    width: 0.26rem;
+    height: 0.26rem;
+  }
+
+  .dot--filled {
+    background: var(--color-accent-deep);
+    border: 1px solid var(--color-accent-deep);
+  }
+
+  .dot--outline {
+    background: transparent;
+    border: 1px solid var(--color-accent-deep);
+  }
+
+  .atlas-hero__status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.4rem 0.65rem;
+    border-top: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-muted);
+  }
+
+  .atlas-hero__status-coords {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 480px) {
+    .atlas-hero__status {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.2rem;
+    }
+  }
+</style>

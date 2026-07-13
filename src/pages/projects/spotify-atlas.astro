@@ -1,0 +1,573 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import TagList from '../../components/ui/TagList.astro';
+import AtlasHeroWindow from '../../components/projects/AtlasHeroWindow.astro';
+
+const techStack = [
+  'Python',
+  'FastAPI',
+  'PostgreSQL',
+  'Qdrant',
+  'HDBSCAN',
+  'OpenAI Embeddings',
+  'React',
+  'Tailwind CSS',
+  'Plotly',
+];
+
+const builtItems = [
+  'Built ML pipelines for embeddings and clustering',
+  'Designed an interactive dual-map experience',
+  'Created a scalable backend for fast exploration',
+  'Enabled city, genre, and community insights at scale',
+];
+
+const keyFeatures = [
+  {
+    label: 'Dual map views: genre map & city map',
+    d: 'M4 4h11v11H4z M9 9h11v11H9z',
+  },
+  {
+    label: 'Embeddings + clustering (HDBSCAN)',
+    d: 'M6 7a1.3 1.3 0 1 1 0-2.6A1.3 1.3 0 0 1 6 7z M11 5.4a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z M14.5 10.5a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z M8.5 13a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z',
+  },
+  {
+    label: 'City & cluster level insights',
+    d: 'M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z',
+  },
+  {
+    label: 'Audio previews & playlist generation',
+    d: 'M10 8l6 4-6 4V8z',
+  },
+  {
+    label: 'Fast, interactive exploration',
+    d: 'M13 2L4 14h6l-1 8 9-12h-6l1-8z',
+  },
+];
+---
+
+<BaseLayout
+  title="Spotify Atlas · Adit Mohindra"
+  description="An interactive geospatial visualization platform that explores music taste across cities and cultures using embeddings, clustering, and rich metadata."
+>
+  <Container>
+    <article class="atlas-page">
+      <p class="atlas-page__breadcrumb">
+        <span class="atlas-page__breadcrumb-dot" aria-hidden="true"></span>
+        <a href="/projects">Projects</a>
+        <span aria-hidden="true">/</span>
+        <span>Spotify Atlas</span>
+      </p>
+
+      <header class="atlas-page__header">
+        <div class="atlas-page__intro">
+          <img
+            src="/logos/Spotify_Official.svg"
+            alt="Spotify"
+            class="atlas-page__spotify-logo"
+            width="140"
+            height="42"
+            loading="eager"
+          />
+
+          <h1 class="atlas-page__title">
+            <span class="font-accent">A</span><span class="font-display">tlas</span>
+          </h1>
+
+          <p class="atlas-page__summary">
+            An interactive geospatial visualization platform that explores music taste across cities
+            and cultures using embeddings, clustering, and rich metadata.
+          </p>
+
+          <div class="atlas-page__badges">
+            <Badge>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="8" r="3.2"></circle>
+                <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"></path>
+              </svg>
+              Personal Project
+            </Badge>
+            <Badge>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+              >
+                <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"></path>
+                <path d="M12 3v9M4 7.5l8 4.5 8-4.5" opacity="0.5"></path>
+              </svg>
+              ML / Data Product
+            </Badge>
+          </div>
+
+          <div class="atlas-page__stack">
+            <p class="atlas-page__stack-label">Tech Stack</p>
+            <TagList tags={techStack} />
+          </div>
+
+          <div class="atlas-page__actions">
+            {/* TODO: wire real demo/repo URL once deployed */}
+            <Button variant="primary" href="#">
+              Live Demo
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7M17 7H9M17 7V15"></path>
+              </svg>
+            </Button>
+            {/* TODO: wire real demo/repo URL once deployed */}
+            <Button variant="secondary" href="#">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.6-.3 5.3-1.3 5.3-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.7 2.7 5.7 5.3 6-.6.6-.6 1.2-.5 2V21"
+                ></path>
+              </svg>
+              View Code
+            </Button>
+          </div>
+        </div>
+
+        <div class="atlas-page__graphic">
+          <AtlasHeroWindow />
+        </div>
+      </header>
+
+      <section class="atlas-page__info-grid" aria-label="Project details">
+        <div class="atlas-info-card">
+          <h2 class="atlas-info-card__title">Overview</h2>
+          <p class="atlas-info-card__text">
+            Spotify Atlas visualizes how listening patterns vary across cities and cultures. Using
+            track embeddings and metadata, Atlas surfaces music communities, regional signatures,
+            and taste neighborhoods you can explore interactively.
+          </p>
+          <h3 class="atlas-info-card__subtitle">The Problem</h3>
+          <p class="atlas-info-card__text">
+            Music discovery is siloed. There's no intuitive way to understand how listening tastes
+            relate across places, genres, and cultures at scale.
+          </p>
+        </div>
+
+        <div class="atlas-info-card">
+          <h2 class="atlas-info-card__title">What I Built</h2>
+          <p class="atlas-info-card__text">
+            Atlas is an end-to-end data product that turns millions of songs and listening events
+            into an exploratory map of music.
+          </p>
+          <ul class="atlas-checklist">
+            {
+              builtItems.map((item) => (
+                <li class="atlas-checklist__item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="square"
+                    aria-hidden="true"
+                    class="atlas-checklist__icon"
+                  >
+                    <path d="M4 12l5 5L20 6" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="atlas-info-card">
+          <h2 class="atlas-info-card__title">Key Features</h2>
+          <ul class="atlas-features">
+            {
+              keyFeatures.map((feature) => (
+                <li class="atlas-features__item">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="square"
+                    aria-hidden="true"
+                    class="atlas-features__icon"
+                  >
+                    <path d={feature.d} />
+                  </svg>
+                  <span>{feature.label}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      <section class="atlas-page__section" aria-labelledby="atlas-visual-exploration">
+        <p class="atlas-page__eyebrow">
+          <span class="atlas-page__eyebrow-dot" aria-hidden="true"></span>
+          <span id="atlas-visual-exploration">Visual Exploration</span>
+        </p>
+        <p class="atlas-page__section-subtext">Two ways to explore the music landscape.</p>
+
+        {/* TODO: replace with real screenshots of Atlas UI */}
+        <div class="atlas-placeholder-grid">
+          <div class="atlas-placeholder">
+            <span class="atlas-placeholder__label">Genre Map</span>
+          </div>
+          <div class="atlas-placeholder">
+            <span class="atlas-placeholder__label">City Map</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="atlas-page__section" aria-labelledby="atlas-technical-architecture">
+        <p class="atlas-page__eyebrow">
+          <span class="atlas-page__eyebrow-dot" aria-hidden="true"></span>
+          <span id="atlas-technical-architecture">Technical Architecture</span>
+        </p>
+        <p class="atlas-page__section-subtext">High-level system diagram.</p>
+
+        {
+          /* TODO: add real architecture diagram (data ingestion → embeddings → clustering → API → frontend) */
+        }
+        <div class="atlas-placeholder atlas-placeholder--wide">
+          <span class="atlas-placeholder__label">Architecture Diagram</span>
+        </div>
+      </section>
+    </article>
+  </Container>
+</BaseLayout>
+
+<style>
+  .atlas-page {
+    padding-block: 1.5rem 3rem;
+  }
+
+  .atlas-page__breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .atlas-page__breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .atlas-page__breadcrumb a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .atlas-page__breadcrumb-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .atlas-page__header {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .atlas-page__header {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
+      align-items: center;
+      gap: 2.5rem;
+    }
+  }
+
+  .atlas-page__intro {
+    min-width: 0;
+  }
+
+  .atlas-page__spotify-logo {
+    display: block;
+    height: clamp(2.1rem, 3.6vw, 2.75rem);
+    width: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .atlas-page__title {
+    display: flex;
+    align-items: baseline;
+    line-height: 1;
+    margin: 0 0 1rem;
+    color: var(--color-ink);
+  }
+
+  .atlas-page__title .font-accent {
+    font-size: clamp(3.25rem, 6.5vw, 4.75rem);
+    line-height: 1;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    text-rendering: optimizeSpeed;
+  }
+
+  .atlas-page__title .font-display {
+    font-size: clamp(3.25rem, 6.5vw, 4.75rem);
+    line-height: 0.95;
+    font-weight: var(--text-display--font-weight);
+  }
+
+  .atlas-page__summary {
+    margin: 0 0 1.25rem;
+    max-width: 32rem;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .atlas-page__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .atlas-page__stack {
+    margin-bottom: 1.5rem;
+  }
+
+  .atlas-page__stack-label {
+    margin: 0 0 0.6rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .atlas-page__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .atlas-page__graphic {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .atlas-page__graphic {
+      justify-content: flex-end;
+    }
+  }
+
+  /* Three-column info section */
+  .atlas-page__info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    align-items: stretch;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .atlas-page__info-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .atlas-info-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+    padding: 1.35rem 1.4rem;
+  }
+
+  .atlas-info-card__title {
+    margin: 0 0 0.85rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .atlas-info-card__subtitle {
+    margin: 1.1rem 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .atlas-info-card__text {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .atlas-checklist {
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .atlas-checklist__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.65rem 0;
+    font-size: var(--text-small);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .atlas-checklist__item:not(:last-child) {
+    border-bottom: 1px dotted var(--color-border-muted);
+  }
+
+  .atlas-checklist__item:first-child {
+    padding-top: 0.15rem;
+  }
+
+  .atlas-checklist__icon {
+    flex-shrink: 0;
+    margin-top: 0.12rem;
+    color: var(--color-status-active);
+  }
+
+  .atlas-features {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    flex: 1;
+  }
+
+  .atlas-features__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: var(--text-small);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .atlas-features__icon {
+    flex-shrink: 0;
+    margin-top: 0.08rem;
+    color: var(--color-accent-deep);
+  }
+
+  /* Visual exploration / architecture sections */
+  .atlas-page__section {
+    margin-bottom: 2.75rem;
+  }
+
+  .atlas-page__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .atlas-page__eyebrow-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .atlas-page__section-subtext {
+    margin: 0 0 1.25rem;
+    font-size: var(--text-small);
+    color: var(--color-ink-muted);
+  }
+
+  .atlas-placeholder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  @media (min-width: 640px) {
+    .atlas-placeholder-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .atlas-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .atlas-placeholder--wide {
+    aspect-ratio: 21 / 8;
+  }
+
+  .atlas-placeholder__label {
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+</style>
