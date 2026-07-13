@@ -226,7 +226,7 @@ import { siteConfig } from '../data/site';
 
   .experience-hub__col > .hub-card,
   .experience-hub__col--stack > .hub-card {
-    flex: 1;
+    flex: 1 1 auto;
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -251,6 +251,10 @@ import { siteConfig } from '../data/site';
   .experience-currently,
   .experience-connect {
     padding: 1.25rem 1.35rem;
+  }
+
+  .experience-skills {
+    padding-bottom: 1.5rem;
   }
 
   .hub-card__header {
@@ -333,6 +337,21 @@ import { siteConfig } from '../data/site';
     padding-top: 1.25rem;
   }
 
+  .experience-timeline__content {
+    margin-inline: -0.45rem;
+    padding-inline: 0.45rem;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .experience-timeline__item:hover .experience-timeline__content {
+    background: rgba(90, 107, 181, 0.06);
+    border-color: var(--color-border-muted);
+  }
+
   .experience-timeline__item:not(:last-child) .experience-timeline__content {
     padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--color-border-muted);
@@ -363,10 +382,10 @@ import { siteConfig } from '../data/site';
   }
 
   .experience-timeline__logo {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     flex-shrink: 0;
-    overflow: visible;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,6 +398,8 @@ import { siteConfig } from '../data/site';
   .experience-timeline__logo img {
     width: 100%;
     height: 100%;
+    max-width: 3rem;
+    max-height: 3rem;
     object-fit: contain;
     object-position: center;
     display: block;
@@ -396,6 +417,7 @@ import { siteConfig } from '../data/site';
     margin: 0.1rem 0 0;
     font-size: var(--text-small);
     color: var(--color-accent-deep);
+    cursor: default;
   }
 
   .experience-timeline__dates {
@@ -432,12 +454,29 @@ import { siteConfig } from '../data/site';
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-ink-muted);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .experience-timeline__tag:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--color-accent-deep);
   }
 
   .experience-timeline__link {
     display: inline-flex;
     margin-top: auto;
     padding-top: 1rem;
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .experience-timeline__link:hover {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* Awards */
@@ -456,6 +495,19 @@ import { siteConfig } from '../data/site';
     display: flex;
     gap: 0.85rem;
     align-items: flex-start;
+    margin-inline: -0.35rem;
+    padding: 0.55rem 0.35rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    border-left: 2px solid transparent;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .experience-awards__item:hover {
+    background: rgba(90, 107, 181, 0.06);
+    border-left-color: var(--color-accent-deep);
   }
 
   .experience-awards__icon {
@@ -484,7 +536,6 @@ import { siteConfig } from '../data/site';
   /* Skills */
   .experience-skills {
     min-width: 0;
-    overflow: hidden;
   }
 
   .experience-skills__grid {
@@ -533,6 +584,14 @@ import { siteConfig } from '../data/site';
     letter-spacing: 0.02em;
     color: var(--color-ink-muted);
     line-height: 1.3;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .experience-skills__tag:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--color-accent-deep);
   }
 
   /* Currently */
@@ -559,6 +618,19 @@ import { siteConfig } from '../data/site';
     display: flex;
     gap: 0.85rem;
     align-items: flex-start;
+    margin-inline: -0.35rem;
+    padding: 0.55rem 0.35rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    border-left: 2px solid transparent;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .experience-currently__item:hover {
+    background: rgba(90, 107, 181, 0.06);
+    border-left-color: var(--color-accent-deep);
   }
 
   .experience-currently__icon {
@@ -609,6 +681,15 @@ import { siteConfig } from '../data/site';
     padding-inline: 1.25rem;
     padding-block: 0.75rem;
     font-size: 0.875rem;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.15s ease;
+  }
+
+  .experience-connect__btn:hover {
+    transform: scale(1.02);
   }
 
   .experience-connect .experience-connect__links {
@@ -635,10 +716,20 @@ import { siteConfig } from '../data/site';
     text-decoration: none;
     word-break: break-word;
     line-height: 1.4;
+    border-radius: 6px;
+    padding: 0.2rem 0.15rem;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
   a.experience-connect__row {
     color: var(--color-accent-deep);
+  }
+
+  a.experience-connect__row:hover {
+    color: var(--color-ink);
+    background: rgba(90, 107, 181, 0.06);
   }
 
   .experience-connect__icon {
@@ -702,13 +793,41 @@ import { siteConfig } from '../data/site';
     background: rgba(255, 255, 255, 0.95);
   }
 
+  .experience-featured__link {
+    transition:
+      color 0.2s ease,
+      text-decoration-color 0.2s ease;
+  }
+
+  .experience-featured__link:hover {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .experience-featured__card:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .experience-timeline__content,
+    .experience-awards__item,
+    .experience-currently__item,
+    .experience-timeline__tag,
+    .experience-skills__tag,
+    .experience-connect__btn,
+    .experience-connect__row,
+    .experience-timeline__link,
+    .experience-featured__link,
     .experience-featured__card {
       transition:
+        background-color 0.2s ease,
         border-color 0.2s ease,
-        background-color 0.2s ease;
+        color 0.15s ease;
     }
 
+    .experience-connect__btn:hover,
     .experience-featured__card:hover {
       transform: none;
     }

@@ -57,7 +57,7 @@ export const experienceTimeline: HubTimelineEntry[] = [
     role: 'Data for Good Hackathon',
     company: 'J.P. Morgan Chase',
     dates: 'Oct 2023',
-    logo: '/logos/JPMorgan-Chase-Logo-SVG-desktop.jpg',
+    logo: '/logos/JPMorgan-Chase-Logo-SVG-desktop.png',
     logoAlt: 'J.P. Morgan Chase logo',
     description:
       'Built ML models to predict housing stability and deliver actionable insights for affordable housing solutions. Honorable Mention.',
