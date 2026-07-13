@@ -31,7 +31,7 @@ import { siteConfig } from '../data/site';
 
 <style>
   .home {
-    --hero-graphic-max-h: 28rem;
+    --hero-graphic-max-h: 40rem;
     display: flex;
     flex-direction: column;
     gap: clamp(0.75rem, 1.8vh, 1.25rem);
@@ -47,14 +47,14 @@ import { siteConfig } from '../data/site';
   /* Shorter desktops: compress the graphic + rhythm to preserve single-viewport */
   @media (max-height: 900px) {
     .home {
-      --hero-graphic-max-h: 25rem;
+      --hero-graphic-max-h: 36rem;
       gap: clamp(0.6rem, 1.4vh, 1rem);
     }
   }
 
   @media (max-height: 820px) {
     .home {
-      --hero-graphic-max-h: 22rem;
+      --hero-graphic-max-h: 31rem;
     }
   }
 
@@ -93,7 +93,7 @@ import { siteConfig } from '../data/site';
 
   @media (min-width: 1024px) {
     .home__hero {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
     }
 
     .home__hero-right {

@@ -33,7 +33,7 @@ const progressCells = [true, true, true, true, true, false, false, false];
 
   <!-- Globe (top-left of cluster) -->
   <div class="hero-graphic__globe">
-    <DecorativeGlobe size={64} />
+    <DecorativeGlobe size={90} />
   </div>
 
   <!-- ATLAS.EXE window -->
@@ -117,15 +117,15 @@ const progressCells = [true, true, true, true, true, false, false, false];
 
   <!-- Checkered accent square (bottom-left of ATLAS window) -->
   <div class="hero-graphic__checker">
-    <DecorativeChecker size={32} />
+    <DecorativeChecker size={46} />
   </div>
 
   <!-- Sparkle accents -->
   <div class="hero-graphic__star hero-graphic__star--tr">
-    <DecorativeStar size={22} />
+    <DecorativeStar size={32} />
   </div>
   <div class="hero-graphic__star hero-graphic__star--left">
-    <DecorativeStar size={16} />
+    <DecorativeStar size={23} />
   </div>
 </div>
 
@@ -146,7 +146,7 @@ const progressCells = [true, true, true, true, true, false, false, false];
     top: 2%;
     right: -4%;
     z-index: 0;
-    font-size: 0.5rem;
+    font-size: 0.71rem;
     line-height: 1;
     color: var(--color-accent-deep);
     opacity: 0.38;
@@ -192,15 +192,15 @@ const progressCells = [true, true, true, true, true, false, false, false];
   .atlas__bar {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.38rem 0.5rem;
+    gap: 0.7rem;
+    padding: 0.54rem 0.71rem;
     border-bottom: 1px solid var(--color-border-ink);
     background: var(--color-canvas);
   }
 
   .atlas__badge {
-    width: 0.85rem;
-    height: 0.85rem;
+    width: 1.2rem;
+    height: 1.2rem;
     flex-shrink: 0;
     background: var(--color-accent);
     border: 1px solid var(--color-accent-deep);
@@ -208,7 +208,7 @@ const progressCells = [true, true, true, true, true, false, false, false];
 
   .atlas__name {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--color-ink);
@@ -216,13 +216,13 @@ const progressCells = [true, true, true, true, true, false, false, false];
 
   .atlas__controls {
     display: inline-flex;
-    gap: 0.34rem;
+    gap: 0.48rem;
     margin-left: auto;
   }
 
   .atlas__ctrl {
-    width: 0.9rem;
-    height: 0.9rem;
+    width: 1.28rem;
+    height: 1.28rem;
     stroke: var(--color-ink);
     stroke-width: 1;
     fill: none;
@@ -251,8 +251,8 @@ const progressCells = [true, true, true, true, true, false, false, false];
     right: 3%;
     display: flex;
     flex-direction: column;
-    gap: 0.16rem;
-    padding: 0.2rem;
+    gap: 0.23rem;
+    padding: 0.28rem;
     border: 1px solid var(--color-border-ink);
     border-radius: 3px;
     background: var(--color-surface);
@@ -260,8 +260,8 @@ const progressCells = [true, true, true, true, true, false, false, false];
   }
 
   .atlas__rail-icon {
-    width: 0.95rem;
-    height: 0.95rem;
+    width: 1.35rem;
+    height: 1.35rem;
     stroke: var(--color-ink);
     stroke-width: 1;
     fill: none;
@@ -274,7 +274,7 @@ const progressCells = [true, true, true, true, true, false, false, false];
     position: absolute;
     right: 0;
     bottom: 3%;
-    width: 35%;
+    width: 40%;
     z-index: 4;
     border: 1px solid var(--color-border-ink);
     border-radius: 6px;
@@ -287,23 +287,23 @@ const progressCells = [true, true, true, true, true, false, false, false];
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.34rem 0.5rem;
+    gap: 0.7rem;
+    padding: 0.48rem 0.71rem;
     border-bottom: 1px solid var(--color-border-ink);
     background: var(--color-canvas);
   }
 
   .sysinfo__name {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--color-ink);
   }
 
   .sysinfo__close {
-    width: 0.82rem;
-    height: 0.82rem;
+    width: 1.16rem;
+    height: 1.16rem;
     stroke: var(--color-ink);
     stroke-width: 1;
     fill: none;
@@ -311,33 +311,34 @@ const progressCells = [true, true, true, true, true, false, false, false];
   }
 
   .sysinfo__body {
-    padding: 0.6rem 0.65rem 0.65rem;
+    padding: 0.85rem 0.92rem 0.92rem;
   }
 
   .sysinfo__list {
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.92rem;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.57rem;
   }
 
   .sysinfo__item {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
     color: var(--color-ink-muted);
   }
 
   .sysinfo__progress {
     display: flex;
-    gap: 0.16rem;
+    gap: 0.23rem;
   }
 
   .sysinfo__cell {
-    width: 0.52rem;
-    height: 0.52rem;
+    width: 0.74rem;
+    height: 0.74rem;
     border: 1px solid var(--color-accent-deep);
     background: transparent;
   }
@@ -385,7 +386,7 @@ const progressCells = [true, true, true, true, true, false, false, false];
 
   @media (min-width: 640px) {
     .hero-graphic__ascii {
-      font-size: 0.42rem;
+      font-size: 0.6rem;
     }
   }
 </style>
