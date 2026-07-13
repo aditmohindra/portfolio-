@@ -1,44 +1,745 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Container from '../components/layout/Container.astro';
-import { getCollection } from 'astro:content';
-
-function parseStartDate(value: string): number {
-  const parsed = Date.parse(value);
-  return Number.isNaN(parsed) ? 0 : parsed;
-}
-
-const experience = (await getCollection('experience')).sort(
-  (a, b) => parseStartDate(b.data.start) - parseStartDate(a.data.start),
-);
+import DecorativeStar from '../components/decor/DecorativeStar.astro';
+import ExperienceHeroGraphic from '../components/experience/ExperienceHeroGraphic.astro';
+import ExperienceTimelineCard from '../components/experience/ExperienceTimelineCard.astro';
+import ExperienceAwardsCard from '../components/experience/ExperienceAwardsCard.astro';
+import ExperienceSkillsCard from '../components/experience/ExperienceSkillsCard.astro';
+import ExperienceCurrentlyCard from '../components/experience/ExperienceCurrentlyCard.astro';
+import ExperienceConnectCard from '../components/experience/ExperienceConnectCard.astro';
+import ExperienceFeaturedProjects from '../components/experience/ExperienceFeaturedProjects.astro';
+import { siteConfig } from '../data/site';
 ---
 
-<BaseLayout title="Experience · Adit Mohindra" description="Professional experience.">
-  <Container>
-    <section class="py-12">
-      <h1 class="text-2xl font-semibold text-ink">Experience</h1>
-      <ul class="mt-6 space-y-6">
-        {
-          experience.map((entry) => (
-            <li class="border border-border-muted bg-surface p-4">
-              <h2 class="font-medium text-ink">{entry.data.role}</h2>
-              <p class="text-sm text-ink-muted">
-                {entry.data.company} · {entry.data.location}
-              </p>
-              <p class="font-mono text-xs text-ink-muted">
-                {entry.data.start} – {entry.data.end}
-              </p>
-              {entry.data.bullets.length > 0 && (
-                <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-muted">
-                  {entry.data.bullets.map((bullet) => (
-                    <li>{bullet}</li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))
-        }
-      </ul>
+<BaseLayout
+  title="About Me · Adit Mohindra"
+  description="Experience, skills, awards, and background for Adit Mohindra — Data Scientist / ML Engineer."
+>
+  <Container wide class="experience-hub-container">
+    <section class="experience-hub">
+      <header class="experience-hub__header">
+        <div class="experience-hub__intro">
+          <p class="experience-hub__record">
+            <span class="experience-hub__record-dot" aria-hidden="true"></span>
+            <span>SYS.RECORD 03 / EXPERIENCE</span>
+          </p>
+
+          <h1 class="experience-hub__title">
+            <DecorativeStar size={22} class="experience-hub__sparkle" />
+            <span class="experience-hub__title-word">
+              <span class="experience-hub__title-accent font-accent">A</span><span
+                class="experience-hub__title-display font-display">bout Me</span
+              >
+            </span>
+            <DecorativeStar size={22} class="experience-hub__sparkle" />
+          </h1>
+
+          <p class="experience-hub__subtitle">{siteConfig.heroAccentLine}</p>
+
+          <p class="experience-hub__description">
+            I build applied machine learning systems that solve real-world problems. My work sits at
+            the intersection of ML systems, product thinking, and the music + data space.
+          </p>
+        </div>
+
+        <div class="experience-hub__graphic">
+          <ExperienceHeroGraphic />
+        </div>
+      </header>
+
+      <div class="experience-hub__grid">
+        <div class="experience-hub__col experience-hub__col--wide">
+          <ExperienceTimelineCard />
+        </div>
+
+        <div class="experience-hub__col experience-hub__col--stack">
+          <ExperienceAwardsCard />
+          <ExperienceSkillsCard />
+        </div>
+
+        <div class="experience-hub__col experience-hub__col--stack">
+          <ExperienceCurrentlyCard />
+          <ExperienceConnectCard />
+        </div>
+      </div>
+
+      <hr class="experience-hub__divider" />
+
+      <ExperienceFeaturedProjects />
     </section>
   </Container>
 </BaseLayout>
+
+<style is:global>
+  .experience-hub-container {
+    max-width: min(98vw, 112rem) !important;
+    padding-inline: 0.85rem !important;
+  }
+
+  @media (min-width: 640px) {
+    .experience-hub-container {
+      padding-inline: 1rem !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hub-container {
+      padding-inline: 1.25rem !important;
+    }
+  }
+
+  .experience-hub {
+    padding-block: 1.25rem 2rem;
+  }
+
+  .experience-hub__header {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hub__header {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  }
+
+  .experience-hub__intro {
+    min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hub__intro {
+      max-width: calc(100% - 18rem);
+    }
+  }
+
+  .experience-hub__record {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .experience-hub__record-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .experience-hub__title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 0.5rem;
+    color: var(--color-ink);
+  }
+
+  .experience-hub__sparkle {
+    flex-shrink: 0;
+  }
+
+  .experience-hub__title-word {
+    display: inline-flex;
+    align-items: baseline;
+    line-height: 1;
+  }
+
+  .experience-hub__title-accent {
+    font-size: clamp(3.75rem, 7.5vw, 5.75rem);
+    line-height: 1;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    text-rendering: optimizeSpeed;
+  }
+
+  .experience-hub__title-display {
+    font-size: clamp(3.75rem, 7.5vw, 5.75rem);
+    line-height: 0.95;
+    font-weight: var(--text-display--font-weight);
+  }
+
+  .experience-hub__subtitle {
+    margin: 0 0 0.65rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .experience-hub__description {
+    margin: 0;
+    max-width: 42rem;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .experience-hub__graphic {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hub__graphic {
+      justify-content: flex-end;
+      align-self: center;
+    }
+  }
+
+  .experience-hub__grid {
+    display: grid;
+    gap: 1.1rem;
+    align-items: stretch;
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hub__grid {
+      grid-template-columns: minmax(0, 1.32fr) minmax(0, 1.12fr) minmax(0, 0.96fr);
+      align-items: stretch;
+    }
+  }
+
+  .experience-hub__col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .experience-hub__col--stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .experience-hub__col > .hub-card,
+  .experience-hub__col--stack > .hub-card {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-hub__divider {
+    margin: 1.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-muted);
+  }
+
+  /* Shared hub card */
+  .hub-card {
+    border: 1px solid var(--color-border-ink);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.82);
+    padding: 1.15rem 1.25rem;
+  }
+
+  .experience-awards,
+  .experience-skills,
+  .experience-currently,
+  .experience-connect {
+    padding: 1.25rem 1.35rem;
+  }
+
+  .hub-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .hub-card__icon {
+    flex-shrink: 0;
+    width: 1.375rem;
+    height: 1.375rem;
+    color: var(--color-accent-deep);
+  }
+
+  .experience-awards .hub-card__icon,
+  .experience-skills .hub-card__icon,
+  .experience-currently .hub-card__icon,
+  .experience-connect .hub-card__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .hub-card__title {
+    margin: 0;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .experience-awards .hub-card__title,
+  .experience-skills .hub-card__title,
+  .experience-currently .hub-card__title,
+  .experience-connect .hub-card__title {
+    font-size: 0.9375rem;
+    letter-spacing: 0.07em;
+  }
+
+  .experience-awards .hub-card__header,
+  .experience-skills .hub-card__header,
+  .experience-currently .hub-card__header,
+  .experience-connect .hub-card__header {
+    margin-bottom: 1.1rem;
+    padding-bottom: 0.85rem;
+  }
+
+  /* Timeline */
+  .experience-timeline__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 0;
+  }
+
+  .experience-timeline__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .experience-timeline__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 0.4rem;
+    top: 1.1rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border-muted);
+  }
+
+  .experience-timeline__item:not(:first-child) .experience-timeline__content {
+    padding-top: 1.25rem;
+  }
+
+  .experience-timeline__item:not(:last-child) .experience-timeline__content {
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .experience-timeline__marker {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-top: 0.35rem;
+    border: 1px solid var(--color-border-ink);
+    border-radius: 9999px;
+    background: var(--color-surface);
+    justify-self: center;
+  }
+
+  .experience-timeline__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .experience-timeline__identity {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-width: 0;
+  }
+
+  .experience-timeline__logo {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .experience-timeline__logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
+
+  .experience-timeline__role {
+    margin: 0;
+    font-size: var(--text-h3);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .experience-timeline__company {
+    margin: 0.1rem 0 0;
+    font-size: var(--text-small);
+    color: var(--color-accent-deep);
+  }
+
+  .experience-timeline__dates {
+    margin: 0;
+    flex-shrink: 0;
+    font-size: var(--text-micro);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-muted);
+    text-align: right;
+  }
+
+  .experience-timeline__description {
+    margin: 0.5rem 0 0;
+    font-size: var(--text-small);
+    line-height: 1.5;
+    color: var(--color-ink-muted);
+  }
+
+  .experience-timeline__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.6rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .experience-timeline__tag {
+    display: inline-flex;
+    border: 1px solid var(--color-border-muted);
+    background: var(--color-canvas);
+    padding: 0.125rem 0.4rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .experience-timeline__link {
+    display: inline-flex;
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  /* Awards */
+  .experience-awards__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .experience-awards__item {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  .experience-awards__icon {
+    flex-shrink: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-top: 0.1rem;
+    color: var(--color-accent-deep);
+  }
+
+  .experience-awards__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+
+  .experience-awards__description {
+    margin: 0.3rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-ink-muted);
+  }
+
+  /* Skills */
+  .experience-skills {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .experience-skills__grid {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    gap: 1.15rem;
+    min-width: 0;
+  }
+
+  .experience-skills__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    min-width: 0;
+  }
+
+  .experience-skills__category {
+    margin: 0;
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .experience-skills__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    min-width: 0;
+  }
+
+  .experience-skills__tag {
+    display: inline-flex;
+    max-width: 100%;
+    border: 1px solid var(--color-border-muted);
+    background: var(--color-canvas);
+    padding: 0.22rem 0.55rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--color-ink-muted);
+    line-height: 1.3;
+  }
+
+  /* Currently */
+  .experience-currently__status {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    background: var(--color-status-active);
+    flex-shrink: 0;
+  }
+
+  .experience-currently__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .experience-currently__item {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  .experience-currently__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-top: 0.05rem;
+    color: var(--color-accent-deep);
+  }
+
+  .experience-currently__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .experience-currently__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .experience-currently__description {
+    margin: 0.3rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-ink-muted);
+  }
+
+  /* Connect */
+  .experience-connect__body {
+    margin: 0 0 1.1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-ink-muted);
+  }
+
+  .experience-connect__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .experience-connect__btn {
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    padding-block: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .experience-connect .experience-connect__links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-evenly;
+    gap: 0.65rem;
+  }
+
+  .experience-connect__links li {
+    display: block;
+    font-size: 0.8125rem;
+  }
+
+  .experience-connect__row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    word-break: break-word;
+    line-height: 1.4;
+  }
+
+  a.experience-connect__row {
+    color: var(--color-accent-deep);
+  }
+
+  .experience-connect__icon {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-accent-deep);
+  }
+
+  /* Featured projects */
+  .experience-featured__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .experience-featured__title {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .experience-featured__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--spacing-grid);
+  }
+
+  @media (min-width: 768px) {
+    .experience-featured__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .experience-featured__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--color-border-ink);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.82);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .experience-featured__card:hover {
+    transform: scale(1.02);
+    border-color: var(--color-accent-deep);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-featured__card {
+      transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+    }
+
+    .experience-featured__card:hover {
+      transform: none;
+    }
+  }
+
+  .experience-featured__thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+  }
+
+  .experience-featured__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .experience-featured__placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-canvas);
+  }
+
+  .experience-featured__name {
+    margin: 0;
+    padding: 0 0.75rem 0.75rem;
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+</style>

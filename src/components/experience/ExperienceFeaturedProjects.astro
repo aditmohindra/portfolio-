@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import { featuredProjectSlugs } from '../../data/experience-hub';
+
+const projects = await getCollection('projects');
+const featured = featuredProjectSlugs
+  .map((slug) => projects.find((project) => project.data.slug === slug))
+  .filter((project): project is NonNullable<typeof project> => Boolean(project));
+---
+
+<section class="experience-featured" aria-labelledby="experience-featured-heading">
+  <header class="experience-featured__header">
+    <h2 id="experience-featured-heading" class="experience-featured__title">
+      <span aria-hidden="true">✦</span> FEATURED PROJECTS
+    </h2>
+    <a
+      href="/projects"
+      class="experience-featured__link interactive-surface text-label text-accent-deep hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+    >
+      VIEW ALL PROJECTS →
+    </a>
+  </header>
+
+  <div class="experience-featured__grid" role="list">
+    {
+      featured.map((project) => {
+        const { title, slug, image } = project.data;
+        const href = `/projects/${slug}`;
+
+        return (
+          <a href={href} class="experience-featured__card interactive-surface" role="listitem">
+            <div class="experience-featured__thumb">
+              {image ? (
+                <img src={image} alt="" width="320" height="180" loading="lazy" />
+              ) : (
+                <div class="experience-featured__placeholder" aria-hidden="true" />
+              )}
+            </div>
+            <p class="experience-featured__name">{title}</p>
+          </a>
+        );
+      })
+    }
+  </div>
+</section>

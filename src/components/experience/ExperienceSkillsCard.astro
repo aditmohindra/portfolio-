@@ -1,0 +1,41 @@
+---
+import { skills } from '../../data/skills';
+---
+
+<section class="hub-card experience-skills" aria-labelledby="experience-skills-heading">
+  <header class="hub-card__header">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="square"
+      aria-hidden="true"
+      class="hub-card__icon"
+    >
+      <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4l-6.6 6.6 2.1 2.1 6.6-6.6a4 4 0 0 0 5.4-5.4l-2.1 2.1z"
+      ></path>
+    </svg>
+    <h2 id="experience-skills-heading" class="hub-card__title">SKILLS / TOOLBOX</h2>
+  </header>
+
+  <div class="experience-skills__grid">
+    {
+      skills.map((group) => (
+        <div class="experience-skills__row">
+          <p class="experience-skills__category">{group.category}</p>
+          <ul class="experience-skills__tags">
+            {group.items.map((item) => (
+              <li>
+                <span class="experience-skills__tag">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,35 @@
+---
+import AsciiArtStatic from '../decor/AsciiArtStatic.astro';
+---
+
+<div class="experience-hero-graphic" aria-hidden="true">
+  <AsciiArtStatic class="experience-hero-graphic__art" />
+</div>
+
+<style>
+  .experience-hero-graphic {
+    pointer-events: none;
+    user-select: none;
+    line-height: 0;
+  }
+
+  .experience-hero-graphic__art {
+    display: block;
+    font-size: 0.55rem;
+    line-height: 1;
+    color: var(--color-accent-deep);
+    opacity: 0.9;
+  }
+
+  @media (min-width: 640px) {
+    .experience-hero-graphic__art {
+      font-size: 0.62rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .experience-hero-graphic__art {
+      font-size: 0.75rem;
+    }
+  }
+</style>

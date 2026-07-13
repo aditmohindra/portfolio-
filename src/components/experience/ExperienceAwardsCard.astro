@@ -1,0 +1,59 @@
+---
+import { experienceAwards } from '../../data/experience-hub';
+
+const iconPaths = {
+  trophy:
+    'M8 2h8v3a4 4 0 0 1-8 0V2zm-2 0H4a1 1 0 0 0-1 1v1a3 3 0 0 0 3 3h1V2zm12 0h-2v5h1a3 3 0 0 0 3-3V3a1 1 0 0 0-1-1zM10 14v3H8v1h8v-1h-2v-3',
+  medal: 'M12 2l2 4 4.5.7-3.2 3.2.8 4.6L12 12.5 7.9 14.5l.8-4.6L5.5 6.7 10 6l2-4z',
+  star: 'M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.8l-6.2 4.5 2.4-7.4L2 9.4h7.6L12 2z',
+};
+---
+
+<section class="hub-card experience-awards" aria-labelledby="experience-awards-heading">
+  <header class="hub-card__header">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="square"
+      aria-hidden="true"
+      class="hub-card__icon"
+    >
+      <path
+        d="M8 2h8v3a4 4 0 0 1-8 0V2zM6 2H4a1 1 0 0 0-1 1v1a3 3 0 0 0 3 3h1V2zm12 0h-2v5h1a3 3 0 0 0 3-3V3a1 1 0 0 0-1-1z"
+      ></path>
+    </svg>
+    <h2 id="experience-awards-heading" class="hub-card__title">AWARDS & RECOGNITION</h2>
+  </header>
+
+  <ul class="experience-awards__list">
+    {
+      experienceAwards.map((award) => (
+        <li class="experience-awards__item">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="square"
+            class="experience-awards__icon"
+            aria-hidden="true"
+          >
+            <path d={iconPaths[award.icon]} />
+          </svg>
+          <div class="experience-awards__copy">
+            <p class="experience-awards__title">{award.title}</p>
+            <p class="experience-awards__description">{award.description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

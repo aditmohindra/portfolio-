@@ -1,0 +1,69 @@
+---
+import { currentlyItems } from '../../data/experience-hub';
+---
+
+<section class="hub-card experience-currently" aria-labelledby="experience-currently-heading">
+  <header class="hub-card__header">
+    <span class="experience-currently__status" aria-hidden="true"></span>
+    <h2 id="experience-currently-heading" class="hub-card__title">CURRENTLY</h2>
+  </header>
+
+  <ul class="experience-currently__list">
+    {
+      currentlyItems.map((item) => (
+        <li class="experience-currently__item">
+          <span class="experience-currently__icon" aria-hidden="true">
+            {item.icon === 'globe' && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <ellipse cx="12" cy="12" rx="9" ry="3.5" />
+                <path d="M3 12h18M12 3v18" opacity="0.45" />
+              </svg>
+            )}
+            {item.icon === 'chart' && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+              >
+                <path d="M4 18V8M9 18V4M14 18v-6M19 18v-9" />
+              </svg>
+            )}
+            {item.icon === 'turntable' && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <circle cx="12" cy="12" r="7" />
+                <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+                <path d="M12 5v2M19 12h-2" />
+              </svg>
+            )}
+          </span>
+          <div class="experience-currently__copy">
+            <p class="experience-currently__title">{item.title}</p>
+            <p class="experience-currently__description">{item.description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

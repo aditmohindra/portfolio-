@@ -1,0 +1,64 @@
+---
+import { experienceTimeline } from '../../data/experience-hub';
+import { siteConfig } from '../../data/site';
+---
+
+<section class="hub-card experience-timeline" aria-labelledby="experience-timeline-heading">
+  <header class="hub-card__header">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="square"
+      aria-hidden="true"
+      class="hub-card__icon"
+    >
+      <rect x="3" y="4" width="18" height="17"></rect>
+      <path d="M3 9h18M8 2v4M16 2v4"></path>
+    </svg>
+    <h2 id="experience-timeline-heading" class="hub-card__title">EXPERIENCE</h2>
+  </header>
+
+  <ol class="experience-timeline__list">
+    {
+      experienceTimeline.map((entry) => (
+        <li class="experience-timeline__item">
+          <span class="experience-timeline__marker" aria-hidden="true" />
+          <div class="experience-timeline__content">
+            <div class="experience-timeline__top">
+              <div class="experience-timeline__identity">
+                <div class="experience-timeline__logo">
+                  <img src={entry.logo} alt="" width="56" height="56" loading="lazy" />
+                </div>
+                <div class="experience-timeline__meta">
+                  <h3 class="experience-timeline__role">{entry.role}</h3>
+                  <p class="experience-timeline__company">{entry.company}</p>
+                </div>
+              </div>
+              <p class="experience-timeline__dates tabular-nums">{entry.dates}</p>
+            </div>
+            <p class="experience-timeline__description">{entry.description}</p>
+            <ul class="experience-timeline__tags" aria-label="Tech stack">
+              {entry.tags.map((tag) => (
+                <li>
+                  <span class="experience-timeline__tag">{tag}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <a
+    href={siteConfig.resumeHref}
+    class="experience-timeline__link interactive-surface text-label text-accent-deep hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+  >
+    VIEW FULL EXPERIENCE →
+  </a>
+</section>
