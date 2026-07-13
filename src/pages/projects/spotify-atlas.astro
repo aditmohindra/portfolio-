@@ -243,24 +243,6 @@ const keyFeatures = [
         </div>
       </section>
 
-      <section class="atlas-page__section" aria-labelledby="atlas-visual-exploration">
-        <p class="atlas-page__eyebrow">
-          <span class="atlas-page__eyebrow-dot" aria-hidden="true"></span>
-          <span id="atlas-visual-exploration">Visual Exploration</span>
-        </p>
-        <p class="atlas-page__section-subtext">Two ways to explore the music landscape.</p>
-
-        {/* TODO: replace with real screenshots of Atlas UI */}
-        <div class="atlas-placeholder-grid">
-          <div class="atlas-placeholder">
-            <span class="atlas-placeholder__label">Genre Map</span>
-          </div>
-          <div class="atlas-placeholder">
-            <span class="atlas-placeholder__label">City Map</span>
-          </div>
-        </div>
-      </section>
-
       <section class="atlas-page__section" aria-labelledby="atlas-technical-architecture">
         <p class="atlas-page__eyebrow">
           <span class="atlas-page__eyebrow-dot" aria-hidden="true"></span>
@@ -537,18 +519,6 @@ const keyFeatures = [
     margin: 0 0 1.25rem;
     font-size: var(--text-small);
     color: var(--color-ink-muted);
-  }
-
-  .atlas-placeholder-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.1rem;
-  }
-
-  @media (min-width: 640px) {
-    .atlas-placeholder-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 
   .atlas-placeholder {
