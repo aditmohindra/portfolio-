@@ -1,0 +1,310 @@
+---
+import DecorativeGlobe from '../decor/DecorativeGlobe.astro';
+import DecorativeChecker from '../decor/DecorativeChecker.astro';
+---
+
+<div class="projects-hero-graphic" aria-hidden="true">
+  <!-- Dashed connector: globe → windows -->
+  <svg
+    class="projects-hero-graphic__connector"
+    viewBox="0 0 329 230"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M 56 33 L 103 33 L 103 42"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-dasharray="3 3"
+      stroke-linecap="square"></path>
+    <path
+      d="M 103 33 L 230 33 L 230 136"
+      stroke="currentColor"
+      stroke-width="1"
+      stroke-dasharray="3 3"
+      stroke-linecap="square"></path>
+  </svg>
+
+  <div class="projects-hero-graphic__globe">
+    <DecorativeGlobe size={47} />
+  </div>
+
+  <div class="projects-hero-graphic__checker">
+    <DecorativeChecker size={26} class="text-ink" />
+  </div>
+
+  <!-- Front window: PROJECTS.EXE -->
+  <div class="projects-hero-window projects-hero-window--front">
+    <div class="projects-hero-window__bar">
+      <p class="projects-hero-window__title">PROJECTS.EXE</p>
+      <div class="projects-hero-window__controls" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="projects-hero-window__body projects-hero-window__body--grid">
+      <svg
+        class="projects-hero-window__isometric"
+        viewBox="0 0 160 90"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 60 L80 30 L150 60 L80 90 Z"
+          stroke="currentColor"
+          stroke-width="1"
+          opacity="0.35"></path>
+        <path
+          d="M80 30 V90 M45 45 L80 60 L115 45 M28 52 L80 75 L132 52"
+          stroke="currentColor"
+          stroke-width="0.75"
+          opacity="0.3"></path>
+        <rect
+          x="58"
+          y="42"
+          width="14"
+          height="22"
+          fill="var(--color-accent-deep)"
+          opacity="0.55"
+          transform="skewY(-18)"></rect>
+        <rect
+          x="78"
+          y="36"
+          width="14"
+          height="30"
+          fill="var(--color-accent)"
+          opacity="0.65"
+          transform="skewY(-18)"></rect>
+        <rect
+          x="98"
+          y="48"
+          width="14"
+          height="16"
+          fill="var(--color-accent-glow)"
+          opacity="0.8"
+          transform="skewY(-18)"></rect>
+        <rect
+          x="40"
+          y="50"
+          width="12"
+          height="12"
+          fill="var(--color-accent-deep)"
+          opacity="0.4"
+          transform="skewY(-18)"></rect>
+      </svg>
+      <div class="projects-hero-window__strip"></div>
+    </div>
+  </div>
+
+  <!-- Back window: SYSTEM INFO -->
+  <div class="projects-hero-window projects-hero-window--back">
+    <div class="projects-hero-window__bar">
+      <p class="projects-hero-window__title">SYSTEM INFO</p>
+      <span class="projects-hero-window__close" aria-hidden="true">×</span>
+    </div>
+    <div class="projects-hero-window__body projects-hero-window__body--info">
+      <dl class="projects-hero-window__grid">
+        <dt>FOCUS</dt>
+        <dd>ML SYSTEMS</dd>
+        <dt>DATA</dt>
+        <dd>GEOSPATIAL</dd>
+        <dt>MODELS</dt>
+        <dd>EMBEDDINGS</dd>
+        <dt>IMPACT</dt>
+        <dd>PRODUCT</dd>
+      </dl>
+      <div class="projects-hero-window__status" aria-hidden="true">
+        <span class="filled"></span>
+        <span class="filled"></span>
+        <span class="filled"></span>
+        <span class="filled"></span>
+        <span class="filled mid"></span>
+        <span class="filled mid"></span>
+        <span class="outline"></span>
+        <span class="outline"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .projects-hero-graphic {
+    position: relative;
+    width: 20.5rem;
+    height: 14.4rem;
+    margin-inline: auto;
+    pointer-events: none;
+    user-select: none;
+    overflow: visible;
+  }
+
+  .projects-hero-graphic__connector {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-accent-deep);
+    opacity: 0.55;
+    z-index: 0;
+  }
+
+  .projects-hero-graphic__globe {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.35rem;
+    z-index: 1;
+  }
+
+  .projects-hero-graphic__checker {
+    position: absolute;
+    left: 1.75rem;
+    bottom: 0.35rem;
+    z-index: 4;
+    opacity: 0.85;
+  }
+
+  .projects-hero-window {
+    position: absolute;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+
+  .projects-hero-window--front {
+    top: 2.35rem;
+    left: 3.5rem;
+    width: 12.35rem;
+    z-index: 2;
+  }
+
+  .projects-hero-window--back {
+    top: 8.35rem;
+    left: 9.7rem;
+    width: 11.45rem;
+    z-index: 3;
+  }
+
+  .projects-hero-window__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+    border-bottom: 1px solid var(--color-border-ink);
+    padding: 0.25rem 0.4rem;
+    min-height: 1.25rem;
+  }
+
+  .projects-hero-window__title {
+    margin: 0;
+    font-size: 0.5625rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .projects-hero-window__controls {
+    display: flex;
+    gap: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .projects-hero-window__controls span {
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+  }
+
+  .projects-hero-window__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 1px solid var(--color-border-ink);
+    font-size: 0.5rem;
+    line-height: 1;
+    color: var(--color-ink-muted);
+    flex-shrink: 0;
+  }
+
+  .projects-hero-window__body--grid {
+    display: grid;
+    grid-template-columns: 1fr 0.5rem;
+    height: 5rem;
+  }
+
+  .projects-hero-window__isometric {
+    width: 100%;
+    height: 100%;
+    color: var(--color-accent-deep);
+    background: var(--color-accent-wash);
+  }
+
+  .projects-hero-window__strip {
+    border-left: 1px solid var(--color-border-ink);
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--color-accent-deep) 0 3px,
+      var(--color-surface) 3px 6px
+    );
+  }
+
+  .projects-hero-window__body--info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.4rem 0.5rem 0.45rem;
+  }
+
+  .projects-hero-window__grid {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 3rem) minmax(0, 1fr);
+    column-gap: 0.45rem;
+    row-gap: 0.15rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  .projects-hero-window__grid dt {
+    margin: 0;
+    color: var(--color-ink-muted);
+    white-space: nowrap;
+  }
+
+  .projects-hero-window__grid dd {
+    margin: 0;
+    color: var(--color-ink);
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .projects-hero-window__status {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+    height: 0.45rem;
+  }
+
+  .projects-hero-window__status .filled {
+    background: var(--color-accent-deep);
+  }
+
+  .projects-hero-window__status .filled.mid {
+    background: var(--color-accent);
+    opacity: 0.75;
+  }
+
+  .projects-hero-window__status .outline {
+    border: 1px solid var(--color-accent-deep);
+    background: transparent;
+    opacity: 0.55;
+  }
+</style>

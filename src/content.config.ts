@@ -3,6 +3,7 @@ import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const cardVariant = z.enum(['dark-globe', 'blue-cube', 'light-browser', 'light-wave']);
+const projectCategory = z.enum(['ML/AI', 'Data Product', 'Visualization', 'University', 'Misc']);
 const awardIcon = z.enum(['trophy', 'medal', 'star', 'certificate']);
 
 const projects = defineCollection({
@@ -17,6 +18,7 @@ const projects = defineCollection({
     timeline: z.string(),
     status: z.string().optional(),
     summary: z.string(),
+    categories: z.array(projectCategory).min(1),
     tags: z.array(z.string()),
     stack: z.array(z.string()),
     links: z
@@ -27,6 +29,7 @@ const projects = defineCollection({
       })
       .default({ demo: '', github: '', writeup: '' }),
     heroImage: z.string().optional(),
+    image: z.string().optional(),
     cardVariant,
   }),
 });

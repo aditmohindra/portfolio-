@@ -35,31 +35,28 @@ const navItems = [
     </a>
 
     <div
-      class="top-nav__links font-nav flex flex-wrap items-center justify-end text-label font-normal uppercase"
+      class="top-nav__links font-nav flex flex-wrap items-center justify-end gap-x-8 text-label font-normal uppercase"
     >
       {
         navItems.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+              'interactive-surface relative inline-flex items-center pb-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
               isActive(item.href) ? 'text-accent' : 'text-ink-muted hover:text-ink',
             ]}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
             {item.label}
+            {isActive(item.href) ? (
+              <span
+                class="absolute bottom-0 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-accent"
+                aria-hidden="true"
+              />
+            ) : null}
           </a>
         ))
       }
     </div>
   </div>
 </nav>
-
-<style>
-  .top-nav__links > a:not(:first-child)::before {
-    content: '·';
-    margin-inline: 0.5rem;
-    color: var(--color-ink-muted);
-    pointer-events: none;
-  }
-</style>
