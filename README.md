@@ -1,8 +1,5 @@
-# Adit Mohindra Portfolio
 
-Personal portfolio website for **Adit Mohindra** — Data Scientist / ML Engineer / AI Engineer.
-
-Static-first Astro site targeting **Cloudflare Pages** deployment. Planning docs (`PROJECT_BRIEF.md`, `CONTENT_INVENTORY.md`, `DESIGN_SYSTEM.md`, `ROADMAP.md`) are the source of truth for scope, content shape, and design tokens.
+<img width="1901" height="1409" alt="image" src="https://github.com/user-attachments/assets/f1cd35de-f2b1-4ea1-bea3-e2146a7f299e" />
 
 ## Stack
 
