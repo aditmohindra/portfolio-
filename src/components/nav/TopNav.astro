@@ -28,19 +28,45 @@ const navItems: NavItem[] = [
 <nav
   aria-label="Main navigation"
   class="top-nav sticky top-0 z-50 w-full border-b border-border-ink bg-[rgba(255,255,255,0.85)] backdrop-blur-[8px]"
+  data-top-nav
 >
-  <div
-    class="mx-auto flex w-full max-w-[min(95vw,100rem)] items-center justify-between gap-4 px-4 py-2.5 sm:px-6"
-  >
+  <div class="top-nav__inner mx-auto w-full max-w-[min(95vw,100rem)] px-4 py-2.5 sm:px-6">
     <a
       href="/"
-      class="font-nav text-label font-normal uppercase text-ink interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
+      class="top-nav__brand font-nav text-label font-normal uppercase text-ink interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring"
     >
       ADIT MOHINDRA
     </a>
 
+    <button
+      type="button"
+      class="top-nav__toggle interactive-surface"
+      aria-expanded="false"
+      aria-controls="top-nav-menu"
+      aria-label="Open menu"
+      data-top-nav-toggle
+    >
+      <svg
+        class="top-nav__toggle-icon top-nav__toggle-icon--open"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg
+        class="top-nav__toggle-icon top-nav__toggle-icon--close"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+
     <div
-      class="top-nav__links font-nav flex flex-wrap items-center justify-end gap-x-8 text-label font-normal uppercase"
+      id="top-nav-menu"
+      class="top-nav__menu font-nav text-label font-normal uppercase"
+      data-top-nav-menu
+      hidden
     >
       {
         navItems.map((item) => {
@@ -50,18 +76,13 @@ const navItems: NavItem[] = [
               href={item.href}
               download={item.download ? '' : undefined}
               class:list={[
-                'interactive-surface relative inline-flex items-center pb-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
+                'top-nav__link interactive-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
                 active ? 'text-accent' : 'text-ink-muted hover:text-ink',
               ]}
               aria-current={active ? 'page' : undefined}
             >
               {item.label}
-              {active ? (
-                <span
-                  class="absolute bottom-0 left-1/2 size-1.5 -translate-x-1/2 rounded-full bg-accent"
-                  aria-hidden="true"
-                />
-              ) : null}
+              {active ? <span class="top-nav__active-dot" aria-hidden="true" /> : null}
             </a>
           );
         })
@@ -69,3 +90,206 @@ const navItems: NavItem[] = [
     </div>
   </div>
 </nav>
+
+<script>
+  function initTopNav(nav: HTMLElement) {
+    const toggle = nav.querySelector<HTMLButtonElement>('[data-top-nav-toggle]');
+    const menu = nav.querySelector<HTMLElement>('[data-top-nav-menu]');
+    if (!toggle || !menu) return;
+
+    const toggleButton = toggle;
+    const menuPanel = menu;
+    const mq = window.matchMedia('(min-width: 1024px)');
+
+    function setOpen(open: boolean) {
+      toggleButton.setAttribute('aria-expanded', String(open));
+      toggleButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menuPanel.hidden = !open;
+      nav.classList.toggle('top-nav--open', open);
+    }
+
+    function closeMenu() {
+      setOpen(false);
+    }
+
+    function syncDesktop() {
+      if (mq.matches) {
+        menuPanel.hidden = false;
+        nav.classList.remove('top-nav--open');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      } else if (!nav.classList.contains('top-nav--open')) {
+        menuPanel.hidden = true;
+      }
+    }
+
+    toggleButton.addEventListener('click', () => {
+      if (mq.matches) return;
+      setOpen(menuPanel.hasAttribute('hidden'));
+    });
+
+    menuPanel.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target instanceof HTMLAnchorElement) closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeMenu();
+    });
+
+    mq.addEventListener('change', syncDesktop);
+    syncDesktop();
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-top-nav]').forEach(initTopNav);
+</script>
+
+<style>
+  .top-nav__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'brand toggle'
+      'menu menu';
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .top-nav__brand {
+    grid-area: brand;
+  }
+
+  .top-nav__toggle {
+    grid-area: toggle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid var(--color-border-ink);
+    border-radius: var(--radius-sm, 4px);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  .top-nav__toggle:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  .top-nav__toggle-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: square;
+  }
+
+  .top-nav__toggle-icon--close {
+    display: none;
+  }
+
+  .top-nav--open .top-nav__toggle-icon--open {
+    display: none;
+  }
+
+  .top-nav--open .top-nav__toggle-icon--close {
+    display: block;
+  }
+
+  .top-nav__menu {
+    grid-area: menu;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .top-nav__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--color-border-muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+  }
+
+  .top-nav__link:first-child {
+    border-top: 0;
+  }
+
+  .top-nav__active-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  /* Mobile: collapsed menu panel */
+  @media (max-width: 1023px) {
+    .top-nav__menu[hidden] {
+      display: none;
+    }
+
+    .top-nav--open .top-nav__menu {
+      display: flex;
+      margin-top: 0.5rem;
+      padding-top: 0.25rem;
+      border-top: 1px solid var(--color-border-muted);
+    }
+  }
+
+  /* Desktop: preserve original inline horizontal nav */
+  @media (min-width: 1024px) {
+    .top-nav__inner {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .top-nav__toggle {
+      display: none;
+    }
+
+    .top-nav__menu {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2rem;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .top-nav__menu[hidden] {
+      display: flex;
+    }
+
+    .top-nav__link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 0 0.5rem;
+      border-top: 0;
+    }
+
+    .top-nav__active-dot {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+</style>

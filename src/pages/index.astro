@@ -30,41 +30,27 @@ import { siteConfig } from '../data/site';
 </BaseLayout>
 
 <style>
+  /* Mobile-first: natural scroll, stacked hero */
   .home {
-    --hero-graphic-max-h: 40rem;
+    --hero-graphic-max-h: 18rem;
     display: flex;
     flex-direction: column;
-    gap: clamp(0.75rem, 1.8vh, 1.25rem);
+    gap: 1.5rem;
     width: 100%;
     max-width: min(95vw, 100rem);
     margin-inline: auto;
-    padding-block: clamp(0.75rem, 2vh, 1.5rem) clamp(0.75rem, 2vh, 1.25rem);
-    padding-inline: 0.25rem;
-    height: calc(100dvh - 3.1rem);
-    overflow: hidden;
-  }
-
-  /* Shorter desktops: compress the graphic + rhythm to preserve single-viewport */
-  @media (max-height: 900px) {
-    .home {
-      --hero-graphic-max-h: 36rem;
-      gap: clamp(0.6rem, 1.4vh, 1rem);
-    }
-  }
-
-  @media (max-height: 820px) {
-    .home {
-      --hero-graphic-max-h: 31rem;
-    }
+    padding: 1rem 0.25rem 2rem;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
   }
 
   .home__hero {
     display: grid;
     grid-template-columns: 1fr;
-    align-items: stretch;
-    align-content: stretch;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    flex: 65 1 0%;
+    align-items: start;
+    gap: 2rem;
+    flex: none;
     min-height: 0;
   }
 
@@ -73,34 +59,69 @@ import { siteConfig } from '../data/site';
   }
 
   .home__hero-right {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    width: 100%;
   }
 
   .home__divider {
     margin: 0;
+    width: 100%;
     border: 0;
     border-top: 1px solid var(--color-border-muted);
     flex: 0 0 auto;
   }
 
   .home__featured {
-    flex: 35 1 0%;
+    flex: none;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
+  /* Desktop: single-viewport layout preserved */
   @media (min-width: 1024px) {
+    .home {
+      --hero-graphic-max-h: 40rem;
+      gap: clamp(0.75rem, 1.8vh, 1.25rem);
+      padding-block: clamp(0.75rem, 2vh, 1.5rem) clamp(0.75rem, 2vh, 1.25rem);
+      padding-inline: 0.25rem;
+      height: calc(100dvh - 3.1rem);
+      overflow: hidden;
+    }
+
     .home__hero {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      align-items: stretch;
+      align-content: stretch;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      flex: 65 1 0%;
     }
 
     .home__hero-right {
-      display: flex;
       justify-content: flex-end;
-      align-items: center;
-      min-width: 0;
+    }
+
+    .home__featured {
+      flex: 35 1 0%;
+      justify-content: center;
+    }
+  }
+
+  /* Shorter desktops: compress the graphic + rhythm to preserve single-viewport */
+  @media (min-width: 1024px) and (max-height: 900px) {
+    .home {
+      --hero-graphic-max-h: 36rem;
+      gap: clamp(0.6rem, 1.4vh, 1rem);
+    }
+  }
+
+  @media (min-width: 1024px) and (max-height: 820px) {
+    .home {
+      --hero-graphic-max-h: 31rem;
     }
   }
 </style>

@@ -90,12 +90,18 @@ const thumbTone: Record<string, string> = {
 
   .home-featured__grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: var(--spacing-grid);
     margin: 0;
     padding: 0;
     list-style: none;
     min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .home-featured__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   .home-featured__grid > li {
@@ -131,10 +137,16 @@ const thumbTone: Record<string, string> = {
   .home-featured__thumb {
     position: relative;
     width: 100%;
-    height: clamp(95px, 12vh, 135px);
+    height: 8.75rem;
     overflow: hidden;
     border-bottom: 1px solid var(--color-border-ink);
     background: var(--color-canvas);
+  }
+
+  @media (min-width: 1024px) {
+    .home-featured__thumb {
+      height: clamp(95px, 12vh, 135px);
+    }
   }
 
   .home-featured__thumb img {

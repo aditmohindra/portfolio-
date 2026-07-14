@@ -111,6 +111,6 @@ export const featuredProjectSlugs = [
 
 export const connectLinks = {
   email: 'aditmohindra@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/aditmohindra',
+  linkedin: 'https://www.linkedin.com/in/adit-mohindra/',
   github: 'https://github.com/aditmohindra',
 } as const;
