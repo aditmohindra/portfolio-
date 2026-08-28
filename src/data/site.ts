@@ -4,7 +4,7 @@
  */
 export const siteConfig = {
   name: 'Adit Mohindra',
-  roleLine: 'DATA SCIENTIST / ML ENGINEER',
+  roleLine: 'AI / ML ENGINEER',
   /** Compact tagline for sidebar identity block */
   sidebarTagline: 'DATA + ML + SYSTEMS',
   tagline:
@@ -12,7 +12,7 @@ export const siteConfig = {
   /** Punchy uppercase accent line for Record 01 hero — distinct from sidebarTagline */
   heroAccentLine: 'DATA SCIENTIST / ML ENGINEER',
   heroPositioning:
-    'Data Scientist / ML Engineer building ML systems, music intelligence tools, and interactive data products.',
+    'AI / ML Engineer building production ML systems, scalable data pipelines, and end-to-end machine learning products.',
   heroBio:
     'Focused on applied machine learning — pipelines, embeddings, clustering, and the product layer that makes models useful.',
   aboutPreview:
