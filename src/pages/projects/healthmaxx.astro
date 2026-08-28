@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import ProjectDetailLite from '../../components/projects/ProjectDetailLite.astro';
+import { getEntry } from 'astro:content';
+
+const project = await getEntry('projects', 'healthmaxx');
+if (!project) {
+  throw new Error('Project entry "healthmaxx" not found');
+}
+
+const summary =
+  'AI-powered health optimization app with personalized insights and recommendations.';
+
+const projectMeta = 'Personal project · 2025 – Present · Coming soon';
+
+const techStack = ['Python', 'AI', 'FastAPI', 'PostgreSQL', 'Computer Vision', 'LLM'];
+
+const buildingItems = [
+  'An image-upload pipeline that uses computer vision and an LLM-based reasoning layer to parse the contents of a photo — identifying food items, estimated portions, or exercise type/activity — without requiring manual entry',
+  'Intent parsing that goes beyond simple object detection: interpreting what the user is doing (e.g. distinguishing "eating a meal" vs. "logging a snack," or "a set of squats" vs. "a cardio session") to log activity accurately with minimal user input',
+  'A FastAPI + PostgreSQL backend to store structured logs of food and exercise history over time',
+  'Personalized insight generation: surfacing trends and recommendations based on a user\'s logged activity, rather than generic advice',
+  'Goal: remove the biggest friction point in fitness tracking apps — manual logging — so users actually stick with it',
+];
+---
+
+<BaseLayout title="Healthmaxx · Adit Mohindra" description={summary}>
+  <Container>
+    <ProjectDetailLite
+      title="Healthmaxx"
+      breadcrumbLabel="Healthmaxx"
+      summary={summary}
+      projectMeta={projectMeta}
+      techStack={techStack}
+      cardVariant={project.data.cardVariant}
+    >
+      <Badge slot="badges">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="8" r="3.2"></circle>
+          <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"></path>
+        </svg>
+        Personal Project
+      </Badge>
+      <Badge slot="badges" statusDot statusLabel="In progress">
+        In Progress
+      </Badge>
+
+      <p slot="overview" class="project-lite-info-card__text">
+        Healthmaxx is a personal fitness and nutrition tracking app built around a simple idea:
+        logging should be as frictionless as taking a photo. Instead of manually searching food
+        databases or selecting exercises from dropdown menus, users snap a photo — a plate of food, a
+        workout in progress, a gym session — and the app handles the rest.
+      </p>
+
+      <h3 slot="overview" class="project-lite-info-card__subtitle">What I'm Building</h3>
+      <ul slot="overview" class="project-lite-checklist">
+        {
+          buildingItems.map((item) => (
+            <li class="project-lite-checklist__item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+                class="project-lite-checklist__icon"
+              >
+                <path d="M4 12l5 5L20 6"></path>
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p slot="overview" class="project-lite-info-card__note">
+        This project is actively in development — more details and a live demo coming soon.
+      </p>
+    </ProjectDetailLite>
+  </Container>
+</BaseLayout>

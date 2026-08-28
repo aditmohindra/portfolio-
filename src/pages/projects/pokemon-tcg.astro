@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import ProjectDetailLite from '../../components/projects/ProjectDetailLite.astro';
+
+const summary =
+  'An autonomous agent that plays the Pokémon Trading Card Game — reasoning through board state, hand options, and turn strategy to make competitive plays.';
+
+const techStack = ['Python', 'LangChain', 'Agents', 'LLM'];
+
+const heroImage = {
+  src: '/images/projects/pokemon-tcg-hero.png',
+  alt: 'TCG Agent Board dashboard showing game status, board state, hand options, AI reasoning trace, and action candidates for Pokémon TCG agentic play',
+  width: 1024,
+  height: 512,
+};
+
+const builtItems = [
+  'Designed an LLM-based agentic decision loop that parses game state and selects legal, strategically sound actions each turn',
+  'Implemented reasoning over core TCG mechanics: type matchups, energy attachment, retreat cost, and prize card trading',
+  'Built evaluation logic to compare agent performance across different game states and opponent strategies',
+  'Entered into an official Pokémon Company-sponsored Kaggle competition, testing agentic reasoning against a real competitive ruleset',
+];
+
+const competitionUrl =
+  'https://www.kaggle.com/competitions/pokemon-tcg-ai-battle-challenge-strategy';
+---
+
+<BaseLayout title="Pokémon TCG Agentic AI · Adit Mohindra" description={summary}>
+  <Container>
+    <ProjectDetailLite
+      title="Pokémon TCG Agentic AI"
+      breadcrumbLabel="Pokémon TCG Agentic AI"
+      summary={summary}
+      techStack={techStack}
+      heroImage={heroImage}
+    >
+      <Badge slot="badges">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <path d="M8 21h8M12 17v4M7 4h10l1 7H6L7 4z"></path>
+          <path d="M6 11h12v2a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5v-2z"></path>
+        </svg>
+        Competition
+      </Badge>
+      <Badge slot="badges">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <rect x="4" y="4" width="16" height="16" rx="1"></rect>
+          <path d="M9 9h6M9 12h6M9 15h4"></path>
+        </svg>
+        Agentic AI
+      </Badge>
+
+      <Button
+        slot="actions"
+        variant="primary"
+        href={competitionUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View Competition
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <path d="M7 17L17 7M17 7H9M17 7V15"></path>
+        </svg>
+      </Button>
+
+      <p slot="overview" class="project-lite-info-card__text">
+        Built for the official "PTCG AI Battle Challenge Strategy" competition hosted by The Pokémon
+        Company on Kaggle. The challenge: design an agent capable of reasoning through Pokémon TCG
+        gameplay — evaluating board state, hand composition, energy management, and matchup dynamics
+        to make strategic, rules-legal decisions turn by turn.
+      </p>
+
+      <h3 slot="overview" class="project-lite-info-card__subtitle">What I Built</h3>
+      <ul slot="overview" class="project-lite-checklist">
+        {
+          builtItems.map((item) => (
+            <li class="project-lite-checklist__item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                aria-hidden="true"
+                class="project-lite-checklist__icon"
+              >
+                <path d="M4 12l5 5L20 6"></path>
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </ProjectDetailLite>
+  </Container>
+</BaseLayout>

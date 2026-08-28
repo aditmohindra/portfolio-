@@ -1,0 +1,77 @@
+---
+/** Shared Technical Architecture diagram block for project detail pages. */
+interface Props {
+  sectionId: string;
+  imageSrc: string;
+  imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
+}
+
+const { sectionId, imageSrc, imageAlt, imageWidth, imageHeight } = Astro.props;
+---
+
+<section class="tech-architecture" aria-labelledby={sectionId}>
+  <p class="tech-architecture__eyebrow">
+    <span class="tech-architecture__eyebrow-dot" aria-hidden="true"></span>
+    <span id={sectionId}>Technical Architecture</span>
+  </p>
+  <p class="tech-architecture__subtext">High-level system diagram.</p>
+
+  <div class="tech-architecture__frame">
+    <img
+      class="tech-architecture__img"
+      src={imageSrc}
+      alt={imageAlt}
+      width={imageWidth}
+      height={imageHeight}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+<style>
+  .tech-architecture {
+    margin-bottom: 2.75rem;
+  }
+
+  .tech-architecture__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .tech-architecture__eyebrow-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .tech-architecture__subtext {
+    margin: 0 0 1.25rem;
+    font-size: var(--text-small);
+    color: var(--color-ink-muted);
+  }
+
+  .tech-architecture__frame {
+    max-width: 1200px;
+    margin-inline: auto;
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .tech-architecture__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>

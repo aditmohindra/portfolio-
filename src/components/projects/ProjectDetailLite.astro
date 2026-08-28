@@ -1,0 +1,366 @@
+---
+import TagList from '../ui/TagList.astro';
+
+type CardVariant = 'dark-globe' | 'blue-cube' | 'light-browser' | 'light-wave';
+
+interface HeroImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+interface Props {
+  title: string;
+  breadcrumbLabel: string;
+  summary: string;
+  techStack: string[];
+  heroImage?: HeroImage;
+  cardVariant?: CardVariant;
+  projectMeta?: string;
+}
+
+const { title, breadcrumbLabel, summary, techStack, heroImage, cardVariant, projectMeta } =
+  Astro.props;
+
+const thumbnailPatterns: Record<CardVariant, string> = {
+  'dark-globe': 'project-lite__thumb--dark',
+  'blue-cube': 'project-lite__thumb--blue',
+  'light-browser': 'project-lite__thumb--browser',
+  'light-wave': 'project-lite__thumb--wave',
+};
+---
+
+<article class="project-lite">
+  <p class="project-lite__breadcrumb">
+    <span class="project-lite__breadcrumb-dot" aria-hidden="true"></span>
+    <a href="/projects">Projects</a>
+    <span aria-hidden="true">/</span>
+    <span>{breadcrumbLabel}</span>
+  </p>
+
+  <header class="project-lite__header">
+    <div class="project-lite__intro">
+      <h1 class="project-lite__title font-display">{title}</h1>
+
+      {projectMeta ? <p class="project-lite__meta">{projectMeta}</p> : null}
+
+      <p class="project-lite__summary">{summary}</p>
+
+      <div class="project-lite__badges">
+        <slot name="badges" />
+      </div>
+
+      <div class="project-lite__stack">
+        <p class="project-lite__stack-label">Tech Stack</p>
+        <TagList tags={techStack} />
+      </div>
+
+      {
+        Astro.slots.has('actions') ? (
+          <div class="project-lite__actions">
+            <slot name="actions" />
+          </div>
+        ) : null
+      }
+    </div>
+
+    <div class="project-lite__graphic">
+      {
+        heroImage ? (
+          <div
+            class="project-lite__hero-frame"
+            style={{
+              '--hero-max-width': `${heroImage.width}px`,
+              '--hero-max-height': `${heroImage.height}px`,
+              '--hero-aspect-ratio': `${heroImage.width} / ${heroImage.height}`,
+            }}
+          >
+            <img
+              class="project-lite__hero-img"
+              src={heroImage.src}
+              alt={heroImage.alt}
+              width={heroImage.width}
+              height={heroImage.height}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        ) : cardVariant ? (
+          <div class:list={['project-lite__thumb', thumbnailPatterns[cardVariant]]} aria-hidden="true" />
+        ) : null
+      }
+    </div>
+  </header>
+
+  <section class="project-lite__overview" aria-label="Project overview">
+    <div class="project-lite-info-card">
+      <h2 class="project-lite-info-card__title">Overview</h2>
+      <slot name="overview" />
+    </div>
+  </section>
+</article>
+
+<style>
+  .project-lite {
+    padding-block: 1.5rem 3rem;
+  }
+
+  .project-lite__breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .project-lite__breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project-lite__breadcrumb a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .project-lite__breadcrumb-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-accent-deep);
+  }
+
+  .project-lite__header {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .project-lite__header {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
+      align-items: center;
+      gap: 2.5rem;
+    }
+  }
+
+  .project-lite__intro {
+    min-width: 0;
+  }
+
+  .project-lite__title {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 4.5vw, 2.75rem);
+    line-height: 1.05;
+    font-weight: var(--text-display--font-weight);
+    color: var(--color-ink);
+  }
+
+  .project-lite__meta {
+    margin: 0 0 0.85rem;
+    font-size: var(--text-small);
+    line-height: 1.45;
+    color: var(--color-ink-muted);
+  }
+
+  .project-lite__summary {
+    margin: 0 0 1.25rem;
+    max-width: 32rem;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .project-lite__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-lite__stack {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-lite__stack-label {
+    margin: 0 0 0.6rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .project-lite__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .project-lite__graphic {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .project-lite__graphic {
+      justify-content: flex-end;
+    }
+  }
+
+  .project-lite__hero-frame {
+    width: 100%;
+    max-width: var(--hero-max-width);
+    aspect-ratio: var(--hero-aspect-ratio);
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-canvas);
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  .project-lite__hero-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: var(--hero-max-width);
+    max-height: var(--hero-max-height);
+    object-fit: contain;
+  }
+
+  .project-lite__thumb {
+    width: min(100%, 28rem);
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--color-border-ink);
+  }
+
+  .project-lite__thumb--dark {
+    background-color: var(--color-surface-dark);
+    background-image:
+      linear-gradient(var(--color-accent-deep) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-accent-deep) 1px, transparent 1px);
+    background-size: 12px 12px;
+    background-position: center;
+  }
+
+  .project-lite__thumb--blue {
+    background-color: var(--color-accent-wash);
+    background-image:
+      linear-gradient(
+        135deg,
+        transparent 48%,
+        var(--color-accent) 48%,
+        var(--color-accent) 52%,
+        transparent 52%
+      ),
+      linear-gradient(
+        45deg,
+        transparent 48%,
+        var(--color-accent-deep) 48%,
+        var(--color-accent-deep) 52%,
+        transparent 52%
+      );
+    background-size: 16px 16px;
+  }
+
+  .project-lite__thumb--browser {
+    background-color: var(--color-surface);
+    background-image:
+      linear-gradient(var(--color-border-muted) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border-muted) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  .project-lite__thumb--wave {
+    background-color: var(--color-canvas);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--color-accent-glow),
+      var(--color-accent-glow) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+  }
+
+  .project-lite__overview {
+    margin-bottom: 2rem;
+  }
+
+  .project-lite-info-card {
+    border: 1px solid var(--color-border-ink);
+    background: var(--color-surface);
+    padding: 1.35rem 1.4rem;
+  }
+
+  .project-lite-info-card__title {
+    margin: 0 0 0.85rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+
+  .project-lite-info-card :global(.project-lite-info-card__text) {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+
+  .project-lite-info-card :global(.project-lite-info-card__text + .project-lite-info-card__text) {
+    margin-top: 0.85rem;
+  }
+
+  .project-lite-info-card :global(.project-lite-info-card__subtitle) {
+    margin: 1.25rem 0 0.65rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+
+  .project-lite-info-card :global(.project-lite-checklist) {
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-lite-info-card :global(.project-lite-checklist__item) {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.65rem 0;
+    font-size: var(--text-small);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+
+  .project-lite-info-card :global(.project-lite-checklist__item:not(:last-child)) {
+    border-bottom: 1px dotted var(--color-border-muted);
+  }
+
+  .project-lite-info-card :global(.project-lite-checklist__icon) {
+    flex-shrink: 0;
+    margin-top: 0.12rem;
+    color: var(--color-status-active);
+  }
+
+  .project-lite-info-card :global(.project-lite-info-card__note) {
+    margin: 1.25rem 0 0;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--color-accent-deep);
+    background: var(--color-canvas);
+    font-size: var(--text-small);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--color-ink-muted);
+  }
+</style>

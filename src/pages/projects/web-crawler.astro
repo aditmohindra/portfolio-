@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Badge from '../../components/ui/Badge.astro';
+import ProjectDetailLite from '../../components/projects/ProjectDetailLite.astro';
+
+const summary =
+  'A custom-built, politeness-compliant web crawler developed for a UCI Information Retrieval course project, built from scratch in Python with multi-threaded crawling and URL frontier management.';
+
+const techStack = ['Python', 'Multi-threading', 'URL Frontier Management'];
+
+const heroImage = {
+  src: '/images/projects/web-crawler-hero.png',
+  alt: 'Web Crawler dashboard showing crawl map, live activity log, crawl metrics, politeness settings, and multi-threaded worker status',
+  width: 1024,
+  height: 512,
+};
+---
+
+<BaseLayout title="Web Crawler · Adit Mohindra" description={summary}>
+  <Container>
+    <ProjectDetailLite
+      title="Web Crawler"
+      breadcrumbLabel="Web Crawler"
+      summary={summary}
+      techStack={techStack}
+      heroImage={heroImage}
+    >
+      <Badge slot="badges">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"></path>
+          <path d="M12 3v9M4 7.5l8 4.5 8-4.5" opacity="0.5"></path>
+        </svg>
+        University Project
+      </Badge>
+      <Badge slot="badges">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="square"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="6"></circle>
+          <path d="M16 16l4 4"></path>
+        </svg>
+        Information Retrieval
+      </Badge>
+
+      <p slot="overview" class="project-lite-info-card__text">
+        Built as part of a UCI Information Retrieval course project: a custom web crawler built from
+        scratch in Python (not using existing frameworks like Scrapy), designed to respect
+        per-domain politeness constraints, avoid duplicate fetches, and coordinate multi-threaded
+        workers through a shared URL frontier.
+      </p>
+      <p slot="overview" class="project-lite-info-card__text">
+        The crawler collected and structured web pages for downstream indexing and retrieval
+        experiments — a team submission focused on correct concurrent crawling behavior rather than
+        a production-scale deployment.
+      </p>
+    </ProjectDetailLite>
+  </Container>
+</BaseLayout>

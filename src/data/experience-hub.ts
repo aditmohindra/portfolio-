@@ -104,7 +104,7 @@ export const currentlyItems: HubCurrentlyEntry[] = [
 
 export const featuredProjectSlugs = [
   'spotify-atlas',
-  'corelogic-hotness',
+  'coreai-market-flare',
   'pokemon-tcg',
   'web-crawler',
 ] as const;
